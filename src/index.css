@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 220 20% 8%;
+    --foreground: 42 50% 90%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 42 50% 90%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 42 50% 90%;
+
+    --primary: 42 80% 55%;
+    --primary-foreground: 220 20% 8%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 42 50% 90%;
+
+    --muted: 220 10% 20%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 185 70% 45%;
+    --accent-foreground: 220 20% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 42 30% 25%;
+    --input: 220 15% 18%;
+    --ring: 42 80% 55%;
+
+    --radius: 0.25rem;
+
+    --gold-glow: 0 0 20px hsl(42 80% 55% / 0.4);
+    --cyan-glow: 0 0 15px hsl(185 70% 45% / 0.5);
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 42 50% 90%;
+    --sidebar-primary: 42 80% 55%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 42 50% 90%;
+    --sidebar-border: 42 30% 20%;
+    --sidebar-ring: 42 80% 55%;
+  }
+}
+
+@layer base {
+ * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+  @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] font-sans;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: hsl(42 80% 55%);
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(180deg, hsl(42 80% 60%), hsl(35 70% 40%));
+  }
+
+  .border-gold {
+    border-color: hsl(42 50% 35%);
+  }
+
+  .glow-gold {
+    box-shadow: var(--gold-glow);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--cyan-glow);
+  }
+
+  .glow-gold-hover:hover {
+    box-shadow: 0 0 25px hsla(55, 100%, 56%, 0.7);
+  }
+
+  .bg-panel {
+    background: linear-gradient(180deg, hsl(220 20% 14% / 0.95), hsl(220 20% 8% / 0.98));
+  }
+
+  .bg-bottom-bar {
+    background: linear-gradient(180deg, hsl(220 15% 10% / 0.9), hsl(220 20% 6%));
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .bg-game-map {
+  background-image: url('/src/assets/map.png');
+  background-size: cover;
+  background-position: center;
+}
+}
