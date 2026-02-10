@@ -23,7 +23,7 @@ describe("Footer", () => {
     expect(screen.getByText(/Models provided by/)).toBeInTheDocument();
     expect(screen.getByText(/League of Legends/)).toBeInTheDocument();
     expect(
-      screen.getByText(/I do not own any rights to the game/)
+      screen.getByText(/I do not own any rights to the game/),
     ).toBeInTheDocument();
   });
 
@@ -37,7 +37,7 @@ describe("Footer", () => {
       "fixed",
       "bottom-0",
       "left-0",
-      "w-full"
+      "w-full",
     );
   });
 });

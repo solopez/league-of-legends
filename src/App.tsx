@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <Route path="/minion-game" element={<MinionGame />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-         <Footer />
+        <Footer />
       </Suspense>
     </Router>
   );
