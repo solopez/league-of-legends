@@ -1,44 +1,43 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import Footer from './Footer';
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import Footer from "./Footer";
 
-describe('Footer', () => {
-    it('renders footer with buttons and attribution text', () => {
-        const mockSetShowWallpaper = vi.fn();
-        render(<Footer setShowWallpaper={mockSetShowWallpaper} />);
-        
-        expect(screen.getByText('Buscar Partida')).toBeInTheDocument();
-        expect(screen.getByText(/Models provided by/)).toBeInTheDocument();
-        expect(screen.getByText('modelviewer.lol')).toBeInTheDocument();
-        expect(screen.getByText('League of Legends')).toBeInTheDocument();
-    });
+describe("Footer", () => {
+  it("renders the footer element", () => {
+    render(<Footer />);
+    const footer = screen.getByRole("contentinfo");
+    expect(footer).toBeInTheDocument();
+  });
 
-    it('calls setShowWallpaper with true when "Buscar Partida" button is clicked', () => {
-        const mockSetShowWallpaper = vi.fn();
-        render(<Footer setShowWallpaper={mockSetShowWallpaper} />);
-        
-        const button = screen.getByText('Buscar Partida');
-        fireEvent.click(button);
-        
-        expect(mockSetShowWallpaper).toHaveBeenCalledWith(true);
-    });
+  it("displays the modelviewer.lol link", () => {
+    render(<Footer />);
+    const link = screen.getByRole("link", { name: /modelviewer\.lol/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "https://modelviewer.lol/");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
 
-    it('renders modelviewer.lol link with correct attributes', () => {
-        const mockSetShowWallpaper = vi.fn();
-        render(<Footer setShowWallpaper={mockSetShowWallpaper} />);
-        
-        const link = screen.getByText('modelviewer.lol');
-        expect(link).toHaveAttribute('href', 'https://modelviewer.lol/');
-        expect(link).toHaveAttribute('target', '_blank');
-        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    });
+  it("displays the copyright disclaimer text", () => {
+    render(<Footer />);
+    expect(screen.getByText(/Models provided by/)).toBeInTheDocument();
+    expect(screen.getByText(/League of Legends/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/I do not own any rights to the game/)
+    ).toBeInTheDocument();
+  });
 
-    it('renders close button with X icon', () => {
-        const mockSetShowWallpaper = vi.fn();
-        render(<Footer setShowWallpaper={mockSetShowWallpaper} />);
-        
-        const footer = screen.getByRole('contentinfo');
-        expect(footer).toBeInTheDocument();
-        expect(footer.querySelector('svg')).toBeInTheDocument();
-    });
+  it("applies correct styling classes to footer", () => {
+    render(<Footer />);
+    const footer = screen.getByRole("contentinfo");
+    expect(footer).toHaveClass(
+      "bg-bottom-bar",
+      "border-t",
+      "border-gold/20",
+      "fixed",
+      "bottom-0",
+      "left-0",
+      "w-full"
+    );
+  });
 });

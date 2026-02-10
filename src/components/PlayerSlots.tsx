@@ -11,9 +11,8 @@ type PlayerSlotsProps = {
 
 const PlayerSlots = ({ players }: PlayerSlotsProps) => {
   return (
-    <main className="flex-1 flex items-center justify-center gap-8 px-8">
+    <main className="mt-40 mb-20 flex items-center justify-center gap-8 px-8">
       <div className="flex items-center gap-6">
-        <EmptySlot />
         <EmptySlot />
       </div>
 
