@@ -1,4 +1,5 @@
 {
+  "homepage": "solopez.github.io/league-of-legends",
   "name": "league-of-legends",
   "private": true,
   "version": "0.0.0",
@@ -9,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "test": "vitest"
+    "test": "vitest",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@google/model-viewer": "^4.1.0",
@@ -39,6 +42,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "identity-obj-proxy": "^3.0.0",
     "jsdom": "^22.1.0",
