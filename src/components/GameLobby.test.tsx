@@ -1,51 +1,63 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import GameLobby from "./GameLobby";
 
 vi.mock("./Header", () => ({
-    default: () => <div data-testid="header">Header</div>,
+  default: () => <div data-testid="header">Header</div>,
 }));
 
 vi.mock("./PlayerSlots", () => ({
-    default: ({ players }: { players: unknown[] }) => (
-        <div data-testid="player-slots">{players.length} players</div>
-    ),
+  default: () => <div data-testid="player-slots">PlayerSlots</div>,
 }));
 
-vi.mock("./Footer", () => ({
-    default: ({ setShowWallpaper }: { setShowWallpaper: unknown }) => (
-        <div data-testid="footer">Footer</div>
-    ),
+vi.mock("./SearchButton", () => ({
+  default: ({ onClick }: { onClick: () => void }) => (
+    <button data-testid="search-button" onClick={onClick}>
+      Search
+    </button>
+  ),
 }));
 
 vi.mock("./Loading", () => ({
-    default: ({ setShowWallpaper }: { setShowWallpaper: unknown }) => (
-        <div data-testid="loading">Loading</div>
-    ),
+  default: () => <div data-testid="loading">Loading</div>,
 }));
 
+vi.mock("../assets/lobby-bg.png", () => ({
+  default: "/mocked-lobby-bg.png",
+}));
+
+const renderGameLobby = () => {
+  return render(
+    <BrowserRouter>
+      <GameLobby />
+    </BrowserRouter>,
+  );
+};
+
 describe("GameLobby", () => {
-    it("renders header, player slots, and footer initially", () => {
-        render(<GameLobby />);
-        expect(screen.getByTestId("header")).toBeInTheDocument();
-        expect(screen.getByTestId("player-slots")).toBeInTheDocument();
-        expect(screen.getByTestId("footer")).toBeInTheDocument();
-    });
+  beforeEach(() => {
+    vi.clearAllTimers();
+    vi.useFakeTimers();
+  });
 
-    it("renders lobby background image", () => {
-        render(<GameLobby />);
-        const img = screen.getByAltText("Lobby background");
-        expect(img).toBeInTheDocument();
-    });
+  afterEach(() => {
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
+  });
 
-    it("passes 2 players to PlayerSlots component", () => {
-        render(<GameLobby />);
-        expect(screen.getByText("2 players")).toBeInTheDocument();
-    });
+  it("should render lobby components on initial load", () => {
+    renderGameLobby();
+    expect(screen.getByTestId("header")).toBeInTheDocument();
+    expect(screen.getByTestId("player-slots")).toBeInTheDocument();
+    expect(screen.getByTestId("search-button")).toBeInTheDocument();
+  });
 
-    it("renders container with correct classes", () => {
-        const { container } = render(<GameLobby />);
-        const div = container.querySelector(".container.mx-auto.relative");
-        expect(div).toBeInTheDocument();
-    });
+  it("should render lobby background image", () => {
+    renderGameLobby();
+
+    const img = screen.getByAltText("Lobby background");
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute("src", "/mocked-lobby-bg.png");
+  });
 });
