@@ -18,6 +18,7 @@ const Model3D: React.FC<ModelViewerProps> = ({
     <model-viewer
       src={src}
       alt={alt}
+      auto-rotate
       auto-play
       camera-controls
       animation-name="Dance_Loop"
