@@ -18,8 +18,8 @@ const MinionGame: React.FC = () => {
   });
   const [enemyType, setEnemyType] = useState<"minion" | "baron">("minion");
   const [modelSources] = useState<{ minion: string; baron: string }>({
-    minion: "/minion.glb",
-    baron: "/baron.glb",
+    minion: "/league-of-legends/minion.glb",
+    baron: "/league-of-legends/baron.glb",
   });
   const [currentModel, setCurrentModel] = useState<string>("");
 

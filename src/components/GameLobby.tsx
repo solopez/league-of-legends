@@ -42,12 +42,12 @@ const GameLobby: React.FC = () => {
                     {
                       nick: "soldrums",
                       description: "La Criofénix",
-                      modelSource: "/firecracker_caitlyn.glb",
+                      modelSource: "/league-of-legends/firecracker_caitlyn.glb",
                     },
                     {
                       nick: "JustLuisa",
                       description: "La arquera de hielo",
-                      modelSource: "/firecracker_ashe.glb",
+                      modelSource: "/league-of-legends/firecracker_ashe.glb",
                     },
                   ]}
                 />
