@@ -72,8 +72,6 @@ const MinionGame: React.FC = () => {
       onClick={handleClickEnemy}
       style={{ backgroundImage: "url('/map.png')" }}
     >
-
-
       {enemyVisible && (
         <div
           className="absolute"

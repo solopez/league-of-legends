@@ -1,5 +1,6 @@
 import EmptySlot from "./EmptySlot";
 import PlayerCard from "./PlayerCard";
+import SearchButton from "./SearchButton";
 
 type PlayerSlotsProps = {
   players: {
@@ -11,7 +12,7 @@ type PlayerSlotsProps = {
 
 const PlayerSlots = ({ players }: PlayerSlotsProps) => {
   return (
-    <main className="mt-40 mb-20 flex items-center justify-center gap-8 px-8">
+    <main className="flex flex-wrap items-center justify-center gap-8 px-8 overflow-auto w-full">
       <div className="flex items-center gap-6">
         <EmptySlot />
       </div>
@@ -27,6 +28,9 @@ const PlayerSlots = ({ players }: PlayerSlotsProps) => {
 
       <div className="flex items-center gap-6">
         <EmptySlot />
+      </div>
+      <div className="w-full flex justify-center mt-4 ">
+        <SearchButton onClick={() => console.log("Search button clicked")} />
       </div>
     </main>
   );

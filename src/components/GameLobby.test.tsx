@@ -50,7 +50,6 @@ describe("GameLobby", () => {
     renderGameLobby();
     expect(screen.getByTestId("header")).toBeInTheDocument();
     expect(screen.getByTestId("player-slots")).toBeInTheDocument();
-    expect(screen.getByTestId("search-button")).toBeInTheDocument();
   });
 
   it("should render lobby background image", () => {

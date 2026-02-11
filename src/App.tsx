@@ -1,10 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 
@@ -25,8 +20,6 @@ const App: React.FC = () => {
   return (
     <BrowserRouter basename="/league-of-legends">
       <Suspense fallback={<Loading />}>
-        {" "}
-        {}
         <Routes>
           <Route path="/" element={isLoading ? <Loading /> : <GameLobby />} />
           <Route path="/game" element={<GameLobby />} />
