@@ -1,12 +1,12 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
+  BrowserRouter,
   Navigate,
+  Route,
+  Routes
 } from "react-router-dom";
-import Loading from "./components/Loading";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
 const GameLobby = React.lazy(() => import("./components/GameLobby"));
 const MinionGame = React.lazy(() => import("./components/MinionGame"));
@@ -23,7 +23,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
+    <BrowserRouter basename="/league-of-legends">
       <Suspense fallback={<Loading />}>
         {" "}
         {}
@@ -35,7 +35,7 @@ const App: React.FC = () => {
         </Routes>
         <Footer />
       </Suspense>
-    </Router>
+    </BrowserRouter>
   );
 };
 

@@ -72,11 +72,7 @@ const MinionGame: React.FC = () => {
       onClick={handleClickEnemy}
       style={{ backgroundImage: "url('/map.png')" }}
     >
-      <div className="flex justify-center items-center bg-gray-950 text-yellow-600 h-12 p-3 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold text-center text-shadow-glow">
-          Clicks del Invocador - Puntaje: {score}
-        </h1>
-      </div>
+
 
       {enemyVisible && (
         <div
