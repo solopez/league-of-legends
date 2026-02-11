@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 const Loading: React.FC = () => {
   return (
     <div
-      className="bg-cover bg-center flex items-center justify-center w-screen h-screen cursor-pointer"
+      className="fixed inset-0 bg-cover bg-center flex items-center justify-center w-screen h-screen cursor-pointer"
       style={{ backgroundImage: `url(${gameMap})` }}
     >
       <div>

@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Loading from "./components/Loading";
+import ChampionSelect from "./components/ChampionSelect";
 
 const GameLobby = React.lazy(() => import("./components/GameLobby"));
 const MinionGame = React.lazy(() => import("./components/MinionGame"));
@@ -24,6 +25,10 @@ const App: React.FC = () => {
           <Route path="/" element={isLoading ? <Loading /> : <GameLobby />} />
           <Route path="/game" element={<GameLobby />} />
           <Route path="/minion-game" element={<MinionGame />} />
+          <Route
+            path="/champion-select"
+            element={isLoading ? <Loading /> : <ChampionSelect />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
