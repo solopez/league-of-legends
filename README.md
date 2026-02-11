@@ -1,9 +1,15 @@
-# League of Legends – React Lobby UI
+# League of Legends – Game Lobby UI 
 
 Proyecto frontend que desarrollé en **React** inspirado en el cliente oficial de **League of Legends**.  
 Incluye una pantalla de lobby, slots de jugadores, modelos 3D, pantalla de carga y transiciones visuales con una estética dorada característica del juego.
 
+🌐 **Demo en producción:** https://solopez.github.io](https://solopez.github.io/league-of-legends
+
 > ⚠️ Este proyecto es **fan-made** y no tiene ninguna afiliación oficial con Riot Games.
+
+![games homepage](https://solopez.github.io/league-of-legends/loading.png)
+
+![detail page](https://solopez.github.io/league-of-legends/game-lobby.png)
 
 ---
 
