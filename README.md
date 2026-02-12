@@ -12,6 +12,8 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 ![detail page](https://solopez.github.io/league-of-legends/game-lobby.png)
 
+
+![champion-selection](https://solopez.github.io/league-of-legends/champ-select.png)
 ---
 
 ## ✨ Features
@@ -20,7 +22,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 - 🧍‍♂️ Slots de jugadores (PlayerCard / EmptySlot)
 - 🌀 Modelos 3D GLB integrados con `<model-viewer>`
 - ⏳ Pantalla de carga (Loading Screen)
-- 🖼️ Wallpaper fullscreen al iniciar partida
+- 🖼️ Selección de campeones
 - 📱 Responsive (desktop-first)
 - 🎨 Tailwind CSS con tema custom (glow, gradients, gold accents)
 - 🧩 Componentes reutilizables
