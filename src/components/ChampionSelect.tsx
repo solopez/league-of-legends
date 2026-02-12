@@ -78,32 +78,42 @@ const ChampionSelect: React.FC = () => {
     e.currentTarget.src = `/league-of-legends/${championUrl}.png`;
   };
 
-  return (
-    <div className="flex justify-center items-center h-screen bg-image bg-cover bg-center bg-[url('/league-of-legends/select.jpg')]">
+return (
+  <div className="relative w-full min-h-screen overflow-y-auto">
+    <img
+      src="/league-of-legends/select.jpg"
+      alt="Background"
+      className="fixed inset-0 w-full h-full object-cover -z-10"
+    />
+
+    <div className="relative flex flex-col items-center py-20 px-4">
       <Link to="/">
         <img
           src="/league-of-legends/logo.png"
           alt="Home"
-          className="w-25 h-25 absolute left-0 top-0 cursor-pointer p-4"
+          className="w-20 h-20 absolute left-0 top-0 cursor-pointer p-4"
         />
       </Link>
-      <div className="bg-gradient-to-r from-gray-950 to-gray-500/1 p-6 rounded-lg shadow-lg w-full max-w-5xl">
+
+      <div className="bg-gradient-to-r from-gray-950 to-gray-500/10 p-6 rounded-lg shadow-lg w-full max-w-5xl">
         <h1 className="text-center text-2xl text-white mb-6 font-bold">
           SELECT YOUR CHAMPION!
         </h1>
 
-        <div className="flex flex-wrap gap-0 justify-center items-center">
+        <div className="flex flex-wrap justify-center">
           {champions.map((champion, index) => (
             <div
               key={index}
-              className="relative flex justify-center items-center rounded-md p-1 border-amber-500 cursor-pointer m-2"
+              className="relative flex justify-center items-center rounded-md p-1 cursor-pointer m-2"
               onClick={() => handleChampionClick(champion)}
             >
               <img
-                src={`/league-of-legends/${champion.toLowerCase().replace(/\s+/g, "-")}.png`}
+                src={`/league-of-legends/${champion
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}.png`}
                 alt={champion}
                 title={champion}
-                className="w-20 h-20 object-cover hover:brightness-50 transition-all duration-300 border border-solid border-amber-400 glow-gold"
+                className="w-20 h-20 object-cover hover:brightness-50 transition-all duration-300 border border-amber-400"
                 onError={(e) => handleImageError(e, champion)}
               />
             </div>
@@ -111,16 +121,20 @@ const ChampionSelect: React.FC = () => {
         </div>
 
         {summoned && selectedChampion && (
-          <ChampionCard
-            champion={selectedChampion}
-            imageUrl={getImageUrl(selectedChampion)}
-            history={championData[selectedChampion].history}
-            abilities={championData[selectedChampion].abilities}
-          />
+          <div className="mt-10">
+            <ChampionCard
+              champion={selectedChampion}
+              imageUrl={getImageUrl(selectedChampion)}
+              history={championData[selectedChampion].history}
+              abilities={championData[selectedChampion].abilities}
+            />
+          </div>
         )}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default ChampionSelect;
