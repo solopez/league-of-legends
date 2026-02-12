@@ -12,6 +12,8 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 ![detail page](https://solopez.github.io/league-of-legends/game-lobby.png)
 
+
+![champion-selection](https://solopez.github.io/league-of-legends/champ-select.png)
 ---
 
 ## ✨ Features
