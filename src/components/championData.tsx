@@ -1,3 +1,5 @@
+const BASE_URL = "/league-of-legends/";
+
 interface ChampionData {
   imageUrl: string;
   history: string;
@@ -28,7 +30,7 @@ type ChampionName =
 
 const championData: Record<ChampionName, ChampionData> = {
   Caitlyn: {
-    imageUrl: "src/assets/caitlyn.png",
+    imageUrl: `${BASE_URL}caitlyn.png`,
     history:
       "Caitlyn es la sheriff de Piltover, conocida por su gran habilidad en el manejo de su rifle.",
     abilities: [
@@ -39,7 +41,7 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Jinx: {
-    imageUrl: "src/assets/jinx.png",
+    imageUrl: `${BASE_URL}jinx.png`,
     history:
       "Jinx es una criminal psicópata de Zaun que disfruta sembrar caos con su arsenal explosivo.",
     abilities: [
@@ -50,25 +52,25 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Samira: {
-    imageUrl: "src/assets/samira.png",
+    imageUrl: `${BASE_URL}samira.png`,
     history:
       "Samira es una mercenaria de Shurima, famosa por su estilo de lucha atrevido y letal.",
     abilities: ["Flair", "Blade Whirl", "Wild Rush", "Inferno Trigger"],
   },
   Gwen: {
-    imageUrl: "src/assets/gwen.png",
+    imageUrl: `${BASE_URL}gwen.png`,
     history:
       "Gwen es una muñeca viviente creada por un hechicero en los límites de la magia.",
     abilities: ["Snip Snip!", "Hallowed Mist", "Skip 'n Slash", "Needlework"],
   },
   Urgot: {
-    imageUrl: "src/assets/urgot.png",
+    imageUrl: `${BASE_URL}urgot.png`,
     history:
       "Urgot es un antiguo líder de la Liga de la Ciudad de Zaun transformado en una máquina con sed de venganza.",
     abilities: ["Corrosive Charge", "Purge", "Disdain", "Fear Beyond Death"],
   },
   "Xin Zhao": {
-    imageUrl: "src/assets/xin-zhao.png",
+    imageUrl: `${BASE_URL}xin-zhao.png`,
     history:
       "Xin Zhao es un guerrero valiente de Ionia, un hombre conocido por su inquebrantable honor y valentía.",
     abilities: [
@@ -79,25 +81,25 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Evelynn: {
-    imageUrl: "src/assets/evelynn.png",
+    imageUrl: `${BASE_URL}evelynn.png`,
     history:
       "Evelynn es un demonio seductor y peligroso que se alimenta del sufrimiento de los demás.",
     abilities: ["Demon Shade", "Hate Spike", "Allure", "Whiplash"],
   },
   Seraphine: {
-    imageUrl: "src/assets/seraphine.png",
+    imageUrl: `${BASE_URL}seraphine.png`,
     history:
       "Seraphine es una cantante de Piltover y Zaun que usa su música para inspirar y sanar a los demás.",
     abilities: ["High Note", "Surround Sound", "Beat Drop", "Encore"],
   },
   "Miss Fortune": {
-    imageUrl: "src/assets/miss-fortune.png",
+    imageUrl: `${BASE_URL}miss-fortune.png`,
     history:
       "Miss Fortune es una tiradora de la región de Bilgewater, famosa por su puntería mortal.",
     abilities: ["Double Up", "Strut", "Make It Rain", "Bullet Time"],
   },
   Lux: {
-    imageUrl: "src/assets/lux.png",
+    imageUrl: `${BASE_URL}lux.png`,
     history:
       "Lux es una maga poderosa de Demacia, conocida por su dominio de la magia de luz.",
     abilities: [
@@ -108,7 +110,7 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Darius: {
-    imageUrl: "src/assets/darius.png",
+    imageUrl: `${BASE_URL}darius.png`,
     history:
       "Darius es un comandante militar brutal de Noxus, conocido como el 'Hombre de Hierro'.",
     abilities: [
@@ -119,7 +121,7 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Nidalee: {
-    imageUrl: "src/assets/nidalee.png",
+    imageUrl: `${BASE_URL}nidalee.png`,
     history:
       "Nidalee es una cazadora de Ionia, con la habilidad de transformarse en una pantera.",
     abilities: [
@@ -130,13 +132,13 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Ahri: {
-    imageUrl: "src/assets/ahri.png",
+    imageUrl: `${BASE_URL}ahri.png`,
     history:
       "Ahri es una hechicera que busca descubrir más sobre sus misteriosos orígenes.",
     abilities: ["Orb of Deception", "Fox-Fire", "Charm", "Spirit Rush"],
   },
   Zyra: {
-    imageUrl: "src/assets/zyra.png",
+    imageUrl: `${BASE_URL}zyra.png`,
     history: "Zyra es una criatura vegetal nacida del caos en la naturaleza.",
     abilities: [
       "Deadly Spines",
@@ -146,13 +148,13 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Gragas: {
-    imageUrl: "src/assets/gragas.png",
+    imageUrl: `${BASE_URL}gragas.png`,
     history:
       "Gragas es un cervecero de Freljord, conocido por su habilidad para derribar a sus enemigos con barriles.",
     abilities: ["Barrel Roll", "Drunken Rage", "Body Slam", "Explosive Cask"],
   },
   Aurelion: {
-    imageUrl: "src/assets/aurelion.png",
+    imageUrl: `${BASE_URL}aurelion.png`,
     history:
       "Aurelion Sol es un ser cósmico que forjó estrellas y galaxias con su propia voluntad.",
     abilities: [
@@ -163,24 +165,24 @@ const championData: Record<ChampionName, ChampionData> = {
     ],
   },
   Garen: {
-    imageUrl: "src/assets/garen.png",
+    imageUrl: `${BASE_URL}garen.png`,
     history:
       "Garen es un guerrero de Demacia, leal hasta la muerte a su patria.",
     abilities: ["Decisive Strike", "Courage", "Judgment", "Demacian Justice"],
   },
   Blitz: {
-    imageUrl: "src/assets/blitz.png",
+    imageUrl: `${BASE_URL}blitz.png`,
     history:
       "Blitzcrank es una máquina creada para proteger Zaun, pero su impulso por ayudar a los demás lo lleva a situaciones peligrosas.",
     abilities: ["Rocket Grab", "Overdrive", "Power Fist", "Static Field"],
   },
   Nami: {
-    imageUrl: "src/assets/nami.jpg",
+    imageUrl: `${BASE_URL}nami.png`,
     history: "Nami es una sirena de Ionia que lucha para proteger su pueblo.",
     abilities: ["Aqua Prison", "Ebb and Flow", "Tidal Wave", "Surging Tides"],
   },
   Nasus: {
-    imageUrl: "src/assets/nasus.png",
+    imageUrl: `${BASE_URL}nasus.png`,
     history:
       "Nasus es un dios antiguo de Shurima, guardián de la sabiduría y la justicia.",
     abilities: [

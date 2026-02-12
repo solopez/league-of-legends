@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ChampionCard from "./ChampionCard";
 import championData from "./championData";
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 type ChampionName =
@@ -62,7 +61,7 @@ const ChampionSelect: React.FC = () => {
 
   const getImageUrl = (champion: ChampionName) => {
     const championUrl = champion.toLowerCase().replace(/\s+/g, "-");
-    let imageUrl = `src/assets/${championUrl}.png`;
+    let imageUrl = `/league-of-legends/${championUrl}.png`;
 
     if (summoned) {
       imageUrl = imageUrl.replace(".png", "_full.png");
@@ -76,14 +75,14 @@ const ChampionSelect: React.FC = () => {
     champion: ChampionName,
   ) => {
     const championUrl = champion.toLowerCase().replace(/\s+/g, "-");
-    e.currentTarget.src = `src/assets/${championUrl}.jpg`;
+    e.currentTarget.src = `/league-of-legends/${championUrl}.png`;
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-image bg-cover bg-center bg-[url('src/assets/select.jpg')]">
+    <div className="flex justify-center items-center h-screen bg-image bg-cover bg-center bg-[url('/league-of-legends/select.jpg')]">
       <Link to="/">
         <img
-          src={logo}
+          src="/league-of-legends/logo.png"
           alt="Home"
           className="w-25 h-25 absolute left-0 top-0 cursor-pointer p-4"
         />
@@ -101,7 +100,7 @@ const ChampionSelect: React.FC = () => {
               onClick={() => handleChampionClick(champion)}
             >
               <img
-                src={`src/assets/${champion.toLowerCase().replace(/\s+/g, "-")}.png`}
+                src={`/league-of-legends/${champion.toLowerCase().replace(/\s+/g, "-")}.png`}
                 alt={champion}
                 title={champion}
                 className="w-20 h-20 object-cover hover:brightness-50 transition-all duration-300 border border-solid border-amber-400 glow-gold"

@@ -51,13 +51,6 @@ describe("ChampionSelect", () => {
     expect(screen.getByText("Test history")).toBeInTheDocument();
   });
 
-  it("handles image error by changing src to jpg", () => {
-    renderComponent();
-    const img = screen.getByTitle("Caitlyn") as HTMLImageElement;
-    fireEvent.error(img);
-    expect(img.src).toContain(".jpg");
-  });
-
   it("constructs correct image URL for champion names with spaces", () => {
     renderComponent();
     const xinZhaoImg = screen.getByTitle("Xin Zhao") as HTMLImageElement;
