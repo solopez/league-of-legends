@@ -84,7 +84,7 @@ describe("PlayerSlots", () => {
   });
 
   it("should navigate after 2 seconds when search button is clicked", () => {
-    const mockNavigate = vi.fn(); 
+    const mockNavigate = vi.fn();
     const user = userEvent.setup({ delay: null });
 
     render(
@@ -95,13 +95,10 @@ describe("PlayerSlots", () => {
 
     const searchButton = screen.getByTestId("search-button");
 
-    
     user.click(searchButton);
 
-    
-    vi.advanceTimersByTime(2000); 
+    vi.advanceTimersByTime(2000);
 
-    
     waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith("/champion-select");
     });
