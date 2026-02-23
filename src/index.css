@@ -137,15 +137,6 @@
     animation: glowing 2s infinite linear;
   }
 
-    .bg-skin-hand {
-    background-color: #fddbb0; /* Color tipo piel */
-  }
-
-  /* Color para los dedos de la mano */
-  .bg-skin-finger {
-    background-color: #f0c27b; /* Color tipo piel de dedos */
-  }
-
   @keyframes glowing {
     0% {
       transform: translateX(-100%);
