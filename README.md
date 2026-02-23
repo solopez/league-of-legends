@@ -14,6 +14,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 
 ![champion-selection](https://solopez.github.io/league-of-legends/champ-select.png)
+![detail page](https://solopez.github.io/league-of-legends/game.png)
 ---
 
 ## ✨ Features
@@ -27,6 +28,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 - 🎨 Tailwind CSS con tema custom (glow, gradients, gold accents)
 - 🧩 Componentes reutilizables
 - ⚡ Vite para desarrollo rápido
+- ⚔️ Desafío 1v1: Reducir Vida del Enemigo
 
 ---
 
