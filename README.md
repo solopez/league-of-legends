@@ -8,13 +8,13 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 > ⚠️ Este proyecto es **fan-made** y no tiene ninguna afiliación oficial con Riot Games.
 
-![games homepage](https://solopez.github.io/league-of-legends/loading.png)
+![games homepage](https://solopez.github.io/league-of-legends/images/loading.png)
 
-![detail page](https://solopez.github.io/league-of-legends/game-lobby.png)
+![detail page](https://solopez.github.io/league-of-legends/images/game-lobby.png)
 
 
-![champion-selection](https://solopez.github.io/league-of-legends/champ-select.png)
-![detail page](https://solopez.github.io/league-of-legends/game.png)
+![champion-selection](https://solopez.github.io/league-of-legends/images/champ-select.png)
+![detail page](https://solopez.github.io/league-of-legends/images/game.png)
 ---
 
 ## ✨ Features
