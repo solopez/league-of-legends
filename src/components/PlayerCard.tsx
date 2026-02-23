@@ -1,7 +1,5 @@
 import { Crown } from "lucide-react";
-import ashe from "../assets/ashe.png";
 import avatar from "../assets/avatar.png";
-import cait from "../assets/cait.png";
 
 import Model3D from "../components/Model3D";
 
@@ -15,7 +13,7 @@ const PlayerCard = ({
   modelSource: string;
 }) => (
   <div className="hidden lg:block">
-    <div className="w-full sm:w-[20rem] md:w-[25rem] lg:w-[25rem] h-auto min-h-[100px] max-h-[700px] flex flex-col items-center bg-panel border border-gold/30 rounded-sm px-8 py-6 relative overflow-hidden">
+    <div className="w-full sm:w-[20rem] md:w-[25rem] lg:w-[25rem] h-400 min-h-[100px] max-h-[700px] flex flex-col items-center bg-panel border border-gold/30 rounded-sm px-8 py-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-gold-gradient rounded-b " />
 
       <div className="relative mb-3">
@@ -34,17 +32,16 @@ const PlayerCard = ({
           {nick}
         </span>
       </div>
-      <span className="text-sm text-muted-foreground mb-4">{description}</span>
-      <Model3D src={modelSource} width="400px" height="400px" />
-
-      <div className="flex gap-3 mb-4">
-        <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-primary glow-gold">
-          <img
-            src={modelSource === "/firecracker_caitlyn.glb" ? cait : ashe}
-            alt="Player"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <span className="text-sm text-muted-foreground ">{description}</span>
+      <div className="mt-25">
+        <Model3D
+          src={modelSource}
+          width="250px"
+          height="250px"
+          animationName="Dance"
+          orbit="0 90deg 0"
+          position="50deg 50deg 1m"
+        />
       </div>
 
       <div className="flex items-center gap-1">

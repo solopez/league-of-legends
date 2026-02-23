@@ -1,38 +1,23 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ChampionSelect from "./components/ChampionSelect";
 import Footer from "./components/Footer";
-import Loading from "./components/Loading";
+import Game from "./components/Game";
 
 const GameLobby = React.lazy(() => import("./components/GameLobby"));
 
-const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+function App() {
   return (
     <BrowserRouter basename="/league-of-legends">
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={isLoading ? <Loading /> : <GameLobby />} />
-          <Route path="/game" element={<GameLobby />} />
-          <Route
-            path="/champion-select"
-            element={isLoading ? <Loading /> : <ChampionSelect />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        <Footer />
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<GameLobby />} />
+        <Route path="/champion-select" element={<ChampionSelect />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
-};
+}
 
 export default App;

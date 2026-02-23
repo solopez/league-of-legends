@@ -1,7 +1,5 @@
 import React from "react";
-import championData from "./championData";
-import type { ChampionName } from "./ChampionRoles";
-import { championRoles, generateStatsByRole } from "./ChampionRoles";
+import championData, { type ChampionName } from "../models/ChampionData";
 
 import ChampionCard from "./ChampionCard";
 
@@ -10,34 +8,24 @@ interface Champion {
   name: ChampionName;
   image: string;
   description: string;
-  stats: {
-    attack: number;
-    defense: number;
-    magic: number;
-    difficulty: number;
-  };
 }
 
 const ChampionSelect: React.FC = () => {
   const champions = Object.keys(championData) as ChampionName[];
 
   const buildChampion = (name: ChampionName, index: number): Champion => {
-    const role = championRoles[name];
-    const stats = generateStatsByRole(role);
-
     return {
       id: index + 1,
       name,
       image: championData[name].imageUrl.replace(".png", "_full.png"),
       description: championData[name].history,
-      stats,
     };
   };
 
   return (
     <div className="relative w-full min-h-screen overflow-y-auto">
       <img
-        src="/league-of-legends/select.jpg"
+        src="/league-of-legends/images/select.jpg"
         alt="Background"
         className="fixed inset-0 w-full h-full object-cover -z-10"
       />

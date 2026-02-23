@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import PlayerCard from "./PlayerCard";
 
 vi.mock("../components/Model3D", () => ({
@@ -17,71 +17,54 @@ vi.mock("../components/Model3D", () => ({
       data-src={src}
       data-width={width}
       data-height={height}
-    />
+    >
+      Model3D Component
+    </div>
   ),
 }));
 
-vi.mock("../assets/ashe.png", () => ({ default: "ashe.png" }));
-vi.mock("../assets/avatar.png", () => ({ default: "avatar.png" }));
-vi.mock("../assets/cait.png", () => ({ default: "cait.png" }));
+vi.mock("../assets/avatar.png", () => ({
+  default: "mocked-avatar.png",
+}));
 
 describe("PlayerCard", () => {
   const defaultProps = {
     nick: "TestPlayer",
-    description: "Professional player",
-    modelSource: "/test_model.glb",
+    description: "A skilled player",
+    modelSource: "/models/player.glb",
   };
 
-  it("renders player card with nick and description", () => {
+  it("renders the player card component", () => {
     render(<PlayerCard {...defaultProps} />);
-
     expect(screen.getByText("TestPlayer")).toBeInTheDocument();
-    expect(screen.getByText("Professional player")).toBeInTheDocument();
   });
 
-  it("renders avatar image with correct alt text", () => {
+  it("displays the player nick", () => {
     render(<PlayerCard {...defaultProps} />);
-
-    const avatarImg = screen.getByAltText("Player avatar");
-    expect(avatarImg).toBeInTheDocument();
+    expect(screen.getByText("TestPlayer")).toBeInTheDocument();
   });
 
-  it("renders Model3D component with correct props", () => {
+  it("displays the player description", () => {
     render(<PlayerCard {...defaultProps} />);
+    expect(screen.getByText("A skilled player")).toBeInTheDocument();
+  });
 
+  it("renders the crown icon", () => {
+    const { container } = render(<PlayerCard {...defaultProps} />);
+    expect(container.querySelector("svg")).toBeInTheDocument();
+  });
+
+  it("renders the Model3D component with correct props", () => {
+    render(<PlayerCard {...defaultProps} />);
     const model3d = screen.getByTestId("model-3d");
-    expect(model3d).toHaveAttribute("data-src", "/test_model.glb");
-    expect(model3d).toHaveAttribute("data-width", "400px");
-    expect(model3d).toHaveAttribute("data-height", "400px");
+    expect(model3d).toHaveAttribute("data-src", "/models/player.glb");
+    expect(model3d).toHaveAttribute("data-width", "250px");
+    expect(model3d).toHaveAttribute("data-height", "250px");
   });
 
-  it("renders Caitlyn image when modelSource is firecracker_caitlyn", () => {
-    render(
-      <PlayerCard {...defaultProps} modelSource="/firecracker_caitlyn.glb" />,
-    );
-
-    const playerImg = screen.getByAltText("Player");
-    expect(playerImg).toHaveAttribute("src", expect.stringContaining("cait"));
-  });
-
-  it("renders Ashe image when modelSource is not firecracker_caitlyn", () => {
-    render(<PlayerCard {...defaultProps} modelSource="/other_model.glb" />);
-
-    const playerImg = screen.getByAltText("Player");
-    expect(playerImg).toHaveAttribute("src", expect.stringContaining("ashe"));
-  });
-
-  it("renders Crown icon", () => {
+  it("renders the avatar image", () => {
     const { container } = render(<PlayerCard {...defaultProps} />);
-
-    const crownIcon = container.querySelector("svg");
-    expect(crownIcon).toBeInTheDocument();
-  });
-
-  it("applies hidden class for non-lg screens", () => {
-    const { container } = render(<PlayerCard {...defaultProps} />);
-
-    const outerDiv = container.firstChild;
-    expect(outerDiv).toHaveClass("hidden", "lg:block");
+    const avatarImg = container.querySelector('img[alt="Player avatar"]');
+    expect(avatarImg).toBeInTheDocument();
   });
 });

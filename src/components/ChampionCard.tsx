@@ -1,18 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-interface ChampionStats {
-  attack: number;
-  defense: number;
-  magic: number;
-  difficulty: number;
-}
+import { useNavigate } from "react-router";
 
 interface Champion {
   id: number;
   name: string;
   image: string;
   description: string;
-  stats: ChampionStats;
 }
 
 interface ChampionCardProps {
@@ -22,6 +16,7 @@ interface ChampionCardProps {
 export default function ChampionCard({ champ }: ChampionCardProps) {
   const [selected, setSelected] = useState<boolean>(false);
   const [flipped, setFlipped] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -104,55 +99,23 @@ export default function ChampionCard({ champ }: ChampionCardProps) {
                     transform: "rotateY(180deg)",
                     backfaceVisibility: "hidden",
                   }}
-                >
-                  <h3 className="text-xl text-yellow-400 font-bold mb-6">
-                    Estadísticas
-                  </h3>
-
-                  <Stat label="Ataque" value={champ.stats.attack} />
-                  <Stat label="Defensa" value={champ.stats.defense} />
-                  <Stat label="Magia" value={champ.stats.magic} />
-                  <Stat label="Dificultad" value={champ.stats.difficulty} />
-                </div>
+                ></div>
               </motion.div>
 
               <button
-                onClick={() => setFlipped((prev) => !prev)}
+                onClick={() => {
+                  navigate(`/game?champion=${champ.name}`);
+                }}
                 className="absolute -bottom-14 left-1/2 -translate-x-1/2 
                 bg-yellow-500 hover:bg-yellow-400 text-black 
                 font-bold px-6 py-2 rounded-full shadow-lg transition"
               >
-                {flipped ? "Ver Splash" : "Ver Stats"}
+                Jugar
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-interface StatProps {
-  label: string;
-  value: number; // 0 - 10
-}
-
-function Stat({ label, value }: StatProps) {
-  return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-1 text-sm">
-        <span>{label}</span>
-        <span>{value}</span>
-      </div>
-
-      <div className="w-full bg-zinc-800 h-2 rounded">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${value * 10}%` }}
-          transition={{ duration: 0.8 }}
-          className="bg-yellow-500 h-2 rounded"
-        />
-      </div>
-    </div>
   );
 }

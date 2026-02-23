@@ -11,3 +11,16 @@ declare module "react" {
     }
   }
 }
+
+declare global {
+  interface HTMLModelViewerElement extends HTMLElement {
+    src: string;
+    alt: string;
+    animationName: string;
+    orbit: string;
+    position: string;
+    width: string;
+    height: string;
+    play: () => void;
+  }
+}
