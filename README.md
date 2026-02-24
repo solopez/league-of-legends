@@ -22,7 +22,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 - 🎮 Lobby estilo League of Legends
 - 🧍‍♂️ Slots de jugadores (PlayerCard / EmptySlot)
-- 🌀 Modelos 3D GLB integrados con `<model-viewer>`
+- 🌀 Modelos 3D GLB integrados con `<model-viewer>` con animaciones
 - ⏳ Pantalla de carga (Loading Screen)
 - 🖼️ Selección de campeones
 - 📱 Responsive (desktop-first)
