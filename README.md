@@ -1,4 +1,4 @@
-# League of Legends – Game Lobby UI 
+# League of Legends – Battle Game  
 
 Proyecto frontend que desarrollé en **React** inspirado en el cliente oficial de **League of Legends**.  
 Incluye una pantalla de lobby, slots de jugadores, modelos 3D, pantalla de carga y transiciones visuales con una estética dorada característica del juego.
