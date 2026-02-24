@@ -42,8 +42,6 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 ### UI / Estilos
 - **Tailwind CSS**
-- **tailwindcss-animate**
-- **tailwind-merge**
 - **Lucide React (iconos)**
 
 ### 3D
