@@ -16,6 +16,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 ![champion-selection](https://solopez.github.io/league-of-legends/images/champ-select.png)
 ![champion-selection](https://solopez.github.io/league-of-legends/images/champ-selected.png)
 ![detail page](https://solopez.github.io/league-of-legends/images/game.png)
+![detail page](https://solopez.github.io/league-of-legends/runeterra.jpg)
 ---
 
 ## ✨ Features
@@ -25,6 +26,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 - 🌀 Modelos 3D GLB integrados con `<model-viewer>` con animaciones
 - ⏳ Pantalla de carga (Loading Screen)
 - 🖼️ Selección de campeones
+- 🌍 Mapa interactivo Runeterra
 - 📱 Responsive (desktop-first)
 - 🎨 Tailwind CSS con tema custom (glow, gradients, gold accents)
 - 🧩 Componentes reutilizables
