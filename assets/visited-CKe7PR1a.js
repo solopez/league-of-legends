@@ -1,0 +1,1 @@
+const r="nexus_visited",s=()=>{try{return JSON.parse(localStorage.getItem(r)||"[]")}catch{return[]}},c=t=>{try{const e=s();e.includes(t)||localStorage.setItem(r,JSON.stringify([...e,t]))}catch{}},n=()=>s().length>=2,a=()=>{const t=s();return["runeterra","lore","champions"].every(e=>t.includes(e))};export{a,s as g,n as i,c as m};

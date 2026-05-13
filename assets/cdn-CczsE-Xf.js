@@ -1,0 +1,1 @@
+const s="14.24.1",e=`https://ddragon.leagueoflegends.com/cdn/${s}/img/champion`,o="https://ddragon.leagueoflegends.com/cdn/img/champion/splash",a="/league-of-legends/images";export{o as D,a as I,e as a};
