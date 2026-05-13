@@ -23,15 +23,12 @@ vi.mock("../components/Model3D", () => ({
   ),
 }));
 
-vi.mock("../assets/avatar.png", () => ({
-  default: "mocked-avatar.png",
-}));
-
 describe("PlayerCard", () => {
   const defaultProps = {
     nick: "TestPlayer",
     description: "A skilled player",
     modelSource: "/models/player.glb",
+    splashId: "Ashe",
   };
 
   it("renders the player card component", () => {
@@ -54,17 +51,9 @@ describe("PlayerCard", () => {
     expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
-  it("renders the Model3D component with correct props", () => {
+  it("renders the Model3D component with correct src", () => {
     render(<PlayerCard {...defaultProps} />);
     const model3d = screen.getByTestId("model-3d");
     expect(model3d).toHaveAttribute("data-src", "/models/player.glb");
-    expect(model3d).toHaveAttribute("data-width", "250px");
-    expect(model3d).toHaveAttribute("data-height", "250px");
-  });
-
-  it("renders the avatar image", () => {
-    const { container } = render(<PlayerCard {...defaultProps} />);
-    const avatarImg = container.querySelector('img[alt="Player avatar"]');
-    expect(avatarImg).toBeInTheDocument();
   });
 });

@@ -1,35 +1,52 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import ChampionCard from "./ChampionCard";
 
-const mockChampion = {
-  id: 1,
-  name: "Ahri",
-  image: "ahri-image.jpg",
-  description: "A magical champion",
-};
-
-vi.mock("react-router", () => ({
-  useNavigate: vi.fn(),
+vi.mock("framer-motion", () => ({
+  motion: {
+    button: ({ children, onClick, style, className }: React.HTMLAttributes<HTMLButtonElement> & { onClick?: () => void }) => (
+      <button onClick={onClick} style={style} className={className}>{children}</button>
+    ),
+    span: ({ children, style, className }: React.HTMLAttributes<HTMLSpanElement>) => (
+      <span style={style} className={className}>{children}</span>
+    ),
+  },
 }));
 
+const defaultProps = {
+  ddId: "Ahri",
+  name: "Ahri",
+  selected: false,
+  onClick: vi.fn(),
+  index: 0,
+};
+
 describe("ChampionCard", () => {
-  test("should render the champion card with name and image", () => {
-    render(<ChampionCard champ={mockChampion} />);
-
-    const imageElement = screen.getByAltText(/Ahri/i);
-    const nameElement = screen.getByText(/Ahri/i);
-
-    expect(imageElement).toBeInTheDocument();
-    expect(nameElement).toBeInTheDocument();
+  test("renders the champion name", () => {
+    render(<ChampionCard {...defaultProps} />);
+    expect(screen.getByText(/Ahri/i)).toBeInTheDocument();
   });
 
-  test("should show the modal when clicked on the card", () => {
-    render(<ChampionCard champ={mockChampion} />);
+  test("renders the champion portrait image", () => {
+    render(<ChampionCard {...defaultProps} />);
+    const portraits = screen.getAllByAltText(/Ahri/i);
+    expect(portraits.length).toBeGreaterThan(0);
+  });
 
-    fireEvent.click(screen.getByAltText(/Ahri/i));
+  test("does not show selected indicator when not selected", () => {
+    render(<ChampionCard {...defaultProps} selected={false} />);
+    expect(screen.queryByText("✦")).not.toBeInTheDocument();
+  });
 
-    const modalElement = screen.getByText(/A magical champion/i);
-    expect(modalElement).toBeInTheDocument();
+  test("shows selected indicator when selected", () => {
+    render(<ChampionCard {...defaultProps} selected={true} />);
+    expect(screen.getByText("✦")).toBeInTheDocument();
+  });
+
+  test("calls onClick when clicked", () => {
+    const onClick = vi.fn();
+    render(<ChampionCard {...defaultProps} onClick={onClick} />);
+    screen.getByText(/Ahri/i).closest("button")?.click();
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });

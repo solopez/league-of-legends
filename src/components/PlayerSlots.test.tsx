@@ -65,11 +65,13 @@ describe("PlayerSlots", () => {
         nick: "Player1",
         description: "Desc1",
         modelSource: "source1",
+        splashId: "Ashe",
       },
       {
         nick: "Player2",
         description: "Desc2",
         modelSource: "source2",
+        splashId: "MissFortune",
       },
     ];
 
