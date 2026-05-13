@@ -44,19 +44,14 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 
 ### UI / Estilos
 - **Tailwind CSS**
-- **Lucide React (iconos)**
 
-### 3D
+### Stack
 - **@google/model-viewer** (para renderizar modelos `.glb`)
+- - Framer Motion
 
 ### Routing
 - **react-router**
 
-### Calidad de código / tooling
-- ESLint
-- Prettier
-- Vitest
-- Testing Library
-- TypeScript ESLint
+
 
 
