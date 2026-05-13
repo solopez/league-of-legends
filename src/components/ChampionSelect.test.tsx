@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ChampionSelect from "./ChampionSelect";
-import championData from "../models/ChampionData";
+import championData from "../data/champions";
 
 vi.mock("./ChampionCard", () => ({
   default: ({ champ }: any) => (

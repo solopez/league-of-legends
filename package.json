@@ -9,11 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\" && npm run prepare",
     "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "prepare": "node remove-comments.cjs"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@google/model-viewer": "^4.1.0",

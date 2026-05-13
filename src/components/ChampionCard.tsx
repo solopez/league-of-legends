@@ -1,121 +1,88 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { useNavigate } from "react-router";
-
-interface Champion {
-  id: number;
-  name: string;
-  image: string;
-  description: string;
-}
+import { motion } from "framer-motion";
+import { DD, DD_SPLASH } from "../constants/cdn";
 
 interface ChampionCardProps {
-  champ: Champion;
+  ddId: string;
+  name: string;
+  selected: boolean;
+  onClick: () => void;
+  index: number;
 }
 
-export default function ChampionCard({ champ }: ChampionCardProps) {
-  const [selected, setSelected] = useState<boolean>(false);
-  const [flipped, setFlipped] = useState<boolean>(false);
-  const navigate = useNavigate();
-
+export default function ChampionCard({ ddId, name, selected, onClick, index }: ChampionCardProps) {
   return (
-    <>
-      <motion.div
-        layoutId={`card-${champ.id}`}
-        onClick={() => setSelected(true)}
-        whileHover={{ scale: 1.07 }}
-        className="relative cursor-pointer rounded-xl overflow-hidden group"
-      >
-        <img
-          src={champ.image}
-          alt={champ.name}
-          className="w-56 h-80 object-cover transition duration-500 group-hover:brightness-110"
-        />
+    <motion.button
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.1 + index * 0.08, duration: 0.35 }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      onClick={onClick}
+      className="relative overflow-hidden rounded cursor-pointer flex-shrink-0 w-full"
+      style={{
+        height: 88,
+        border: `1px solid ${selected ? "#C89B3C" : "#2a2a2a"}`,
+        boxShadow: selected ? "0 0 20px rgba(200,155,60,0.3)" : "none",
+        background: "hsl(220 20% 9%)",
+        transition: "border-color 0.18s, box-shadow 0.18s",
+      }}
+    >
+      <img
+        src={`${DD_SPLASH}/${ddId}_0.jpg`}
+        alt={name}
+        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none"
+        style={{
+          filter: selected ? "brightness(0.55) saturate(0.8)" : "brightness(0.28) saturate(0.5)",
+          transition: "filter 0.2s",
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: selected
+            ? "linear-gradient(to right, rgba(10,10,15,0.2), rgba(10,10,15,0.6))"
+            : "linear-gradient(to right, rgba(10,10,15,0.4), rgba(10,10,15,0.75))",
+        }}
+      />
 
+      {selected && (
         <div
-          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 
-          shadow-[0_0_40px_rgba(255,215,0,0.6)]"
+          className="absolute left-0 top-0 bottom-0 w-0.5"
+          style={{ background: "linear-gradient(to bottom, transparent, #C89B3C, transparent)" }}
         />
+      )}
 
+      <div className="relative z-10 h-full flex items-center gap-3 px-3">
         <div
-          className="absolute bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent 
-          text-yellow-400 font-bold tracking-widest p-3 w-full text-center"
+          className="w-12 h-12 overflow-hidden rounded flex-shrink-0"
+          style={{
+            border: `1px solid ${selected ? "#C89B3C60" : "#2a2a2a"}`,
+            transition: "border-color 0.18s",
+          }}
         >
-          {champ.name}
+          <img
+            src={`${DD}/${ddId}.png`}
+            alt={name}
+            className="w-full h-full object-cover scale-110"
+          />
         </div>
-      </motion.div>
-
-      <AnimatePresence>
+        <span
+          className="text-sm font-bold tracking-widest uppercase text-left"
+          style={{ color: selected ? "#F0E6D3" : "#5a5a5a", transition: "color 0.18s" }}
+        >
+          {name}
+        </span>
         {selected && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50"
+          <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => {
-              setSelected(false);
-              setFlipped(false);
-            }}
+            className="ml-auto text-[9px] tracking-widest uppercase"
+            style={{ color: "#C89B3C" }}
           >
-            <motion.div
-              layoutId={`card-${champ.id}`}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-[360px] h-[520px] perspective"
-            >
-              <motion.div
-                animate={{ rotateY: flipped ? 180 : 0 }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full h-full"
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                <div
-                  className="absolute w-full h-full rounded-2xl overflow-hidden 
-                  bg-zinc-900 border-2 border-yellow-500 
-                  shadow-[0_0_60px_rgba(255,215,0,0.5)]"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <img
-                    src={champ.image}
-                    alt={champ.name}
-                    className="w-full h-full object-cover opacity-90"
-                  />
-
-                  <div className="absolute bottom-0 bg-black/80 p-4 w-full">
-                    <h2 className="text-2xl text-yellow-400 font-bold">
-                      {champ.name}
-                    </h2>
-                    <p className="text-gray-300 text-sm mt-2">
-                      {champ.description}
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  className="absolute w-full h-full rounded-2xl bg-zinc-950 
-                  border-2 border-yellow-500 p-6 text-white"
-                  style={{
-                    transform: "rotateY(180deg)",
-                    backfaceVisibility: "hidden",
-                  }}
-                ></div>
-              </motion.div>
-
-              <button
-                onClick={() => {
-                  navigate(`/game?champion=${champ.name}`);
-                }}
-                className="absolute -bottom-14 left-1/2 -translate-x-1/2 
-                bg-yellow-500 hover:bg-yellow-400 text-black 
-                font-bold px-6 py-2 rounded-full shadow-lg transition"
-              >
-                Jugar
-              </button>
-            </motion.div>
-          </motion.div>
+            ✦
+          </motion.span>
         )}
-      </AnimatePresence>
-    </>
+      </div>
+    </motion.button>
   );
 }

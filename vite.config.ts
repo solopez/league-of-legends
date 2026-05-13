@@ -6,4 +6,7 @@ export default defineConfig({
   base: '/league-of-legends/',
   plugins: [react(), tailwindcss()],
   envDir: './src/environments',
+  optimizeDeps: {
+    include: ["framer-motion", "react-router-dom"], 
+  },
 });

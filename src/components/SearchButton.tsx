@@ -1,17 +1,20 @@
-import React from "react";
+interface SearchButtonProps {
+  onClick: () => void;
+  label: string;
+}
 
-const SearchButton: React.FC<{ onClick: () => void; label: string }> = ({
-  onClick,
-  label,
-}) => {
+export default function SearchButton({ onClick, label }: SearchButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="glow-gold-btn px-12 py-4 w-70 justify-center items-center flex bg-gray-950 bg-accent text-accent-foreground font-bold text-sm tracking-[0.2em] cursor-pointer uppercase rounded-md hover:text-[hsl(0_0%_100%)] transition-all glow-gold border border-accent/50 hover:bg-gradient-to-r from-[#ad9407] to-[#412c01]"
+      className="px-10 py-3 rounded text-xs font-bold tracking-[0.22em] uppercase cursor-pointer transition-all duration-200 hover:opacity-88"
+      style={{
+        backgroundColor: "#C89B3C",
+        color: "#0A0A0F",
+        border: "1px solid #C89B3C",
+      }}
     >
       {label}
     </button>
   );
-};
-
-export default SearchButton;
+}

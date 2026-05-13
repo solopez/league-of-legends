@@ -1,58 +1,115 @@
 import { Crown } from "lucide-react";
-import avatar from "../assets/avatar.png";
+import { useState } from "react";
+import { DD_SPLASH } from "../constants/cdn";
+import Model3D from "./Model3D";
 
-import Model3D from "../components/Model3D";
-
-const PlayerCard = ({
-  nick,
-  description,
-  modelSource,
-}: {
+interface PlayerCardProps {
   nick: string;
   description: string;
   modelSource: string;
-}) => (
-  <div className="hidden lg:block">
-    <div className="w-full sm:w-[20rem] md:w-[25rem] lg:w-[25rem] h-400 min-h-[100px] max-h-[700px] flex flex-col items-center bg-panel border border-gold/30 rounded-sm px-8 py-6 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-gold-gradient rounded-b " />
+  splashId: string;
+}
 
-      <div className="relative mb-3">
-        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary glow-gold">
-          <img
-            src={avatar}
-            alt="Player avatar"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
+export default function PlayerCard({ nick, description, modelSource, splashId }: PlayerCardProps) {
+  const [hovered, setHovered] = useState(false);
 
-      <div className="flex items-center gap-1 mb-1">
-        <Crown className="w-4 h-4 text-primary" />
-        <span className="font-semibold text-foreground tracking-wide">
-          {nick}
-        </span>
-      </div>
-      <span className="text-sm text-muted-foreground ">{description}</span>
-      <div className="mt-25">
+  return (
+    <div
+      className="relative overflow-hidden rounded flex flex-col flex-shrink-0"
+      style={{
+        width: "clamp(180px, 20vw, 260px)",
+        minHeight: "clamp(280px, 40vh, 440px)",
+        border: `1px solid ${hovered ? "#C89B3C" : "#785A28"}`,
+        boxShadow: hovered
+          ? "0 0 28px rgba(200,155,60,0.22)"
+          : "0 4px 24px rgba(0,0,0,0.65)",
+        background: "hsl(220 20% 9%)",
+        transition: "border-color 0.22s, box-shadow 0.22s",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <img
+        src={`${DD_SPLASH}/${splashId}_0.jpg`}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none"
+        style={{
+          filter: hovered
+            ? "brightness(0.45) saturate(0.75)"
+            : "brightness(0.3) saturate(0.6)",
+          transition: "filter 0.3s",
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 20%, rgba(10,10,15,0.85) 100%)",
+        }}
+      />
+
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-0.5"
+        style={{
+          background: `linear-gradient(to right, transparent, ${hovered ? "#C89B3C" : "#785A28"}, transparent)`,
+          transition: "background 0.22s",
+        }}
+      />
+
+      <div className="hidden lg:flex relative z-10 flex-1 items-end justify-center pb-2">
         <Model3D
           src={modelSource}
-          width="250px"
-          height="250px"
+          width="220px"
+          height="240px"
           animationName="Dance"
           orbit="0 90deg 0"
           position="50deg 50deg 1m"
         />
       </div>
 
-      <div className="flex items-center gap-1">
-        <div className="w-8 h-[2px] bg-gradient-to-r from-transparent to-primary/60" />
-        <div className="w-4 h-4 rotate-45 bg-primary/80" />
-        <div className="w-8 h-[2px] bg-gradient-to-l from-transparent to-primary/60" />
+      <div className="lg:hidden flex-1" style={{ minHeight: 60 }} />
+
+      <div className="relative z-10 px-5 pb-5 pt-3 flex flex-col gap-1.5">
+        <div
+          className="h-px w-full mb-1"
+          style={{
+            background: `linear-gradient(to right, ${hovered ? "#C89B3C50" : "#785A2840"}, transparent)`,
+            transition: "background 0.22s",
+          }}
+        />
+        <div className="flex items-center gap-2">
+          <Crown className="w-3 h-3 flex-shrink-0" style={{ color: "#C89B3C" }} />
+          <span
+            className="text-sm font-bold tracking-widest uppercase truncate"
+            style={{ color: "#F0E6D3" }}
+          >
+            {nick}
+          </span>
+        </div>
+        <span className="text-[11px] tracking-wide" style={{ color: "#6a5a4a" }}>
+          {description}
+        </span>
+        <div className="flex items-center gap-1.5 mt-2">
+          <div
+            className="flex-1 h-px"
+            style={{
+              background: `linear-gradient(to right, transparent, ${hovered ? "#C89B3C50" : "#785A2840"})`,
+              transition: "background 0.22s",
+            }}
+          />
+          <div
+            className="w-1.5 h-1.5 rotate-45 flex-shrink-0"
+            style={{ backgroundColor: hovered ? "#C89B3C" : "#785A28", transition: "background-color 0.22s" }}
+          />
+          <div
+            className="flex-1 h-px"
+            style={{
+              background: `linear-gradient(to left, transparent, ${hovered ? "#C89B3C50" : "#785A2840"})`,
+              transition: "background 0.22s",
+            }}
+          />
+        </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-destructive/40 to-transparent" />
     </div>
-  </div>
-);
-
-export default PlayerCard;
+  );
+}

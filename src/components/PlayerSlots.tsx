@@ -5,81 +5,56 @@ import Loading from "./Loading";
 import PlayerCard from "./PlayerCard";
 import SearchButton from "./SearchButton";
 
-type PlayerSlotsProps = {
-  players: {
-    nick: string;
-    description: string;
-    modelSource: string;
-  }[];
+type Player = {
+  nick: string;
+  description: string;
+  modelSource: string;
+  splashId: string;
 };
 
-const PlayerSlots = ({ players }: PlayerSlotsProps) => {
+export default function PlayerSlots({ players }: { players: Player[] }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleSearchClick = () => {
     setLoading(true);
-
-    setTimeout(() => {
-      clearInterval(1000);
-      navigate("/champion-select");
-    }, 2000);
+    setTimeout(() => navigate("/champion-select"), 2000);
   };
 
-  const handleTutorialClick = () => {
-    navigate("/game");
-  };
-
-  const handleBoardClick = () => {
-    navigate("/runeterra");
-  };
+  if (loading) return <Loading />;
 
   return (
-    <main className="flex flex-wrap items-center justify-center gap-8 px-8 overflow-auto w-full">
-      {loading ? (
-        <div className="w-full flex justify-center items-center">
-          <Loading />
-        </div>
-      ) : (
-        <>
-          <div className="flex items-center gap-6">
-            <EmptySlot />
-          </div>
+    <div className="flex flex-col items-center gap-6 px-4 py-2 h-full">
+      <div className="flex items-center justify-center gap-4 lg:gap-6 flex-wrap">
+        <EmptySlot />
+        {players.map((p) => (
+          <PlayerCard key={p.nick} {...p} />
+        ))}
+        <EmptySlot />
+      </div>
 
-          {players.map((player) => (
-            <PlayerCard
-              key={player.nick}
-              nick={player.nick}
-              description={player.description}
-              modelSource={player.modelSource}
-            />
-          ))}
+      <div
+        className="w-full max-w-xs h-px"
+        style={{
+          background:
+            "linear-gradient(to right, transparent, #785A28 30%, #785A28 70%, transparent)",
+        }}
+      />
 
-          <div className="flex items-center gap-6">
-            <EmptySlot />
-          </div>
-
-          <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-4 mt-4 flex-wrap">
-            <SearchButton label="Buscar Partida" onClick={handleSearchClick} />
-            <button
-              type="button"
-              onClick={handleBoardClick}
-              className="px-10 py-3 rounded-md border border-accent/55 text-accent-foreground text-xs font-semibold tracking-[0.15em] uppercase bg-gray-950/80 glow-gold hover:border-accent transition-colors cursor-pointer"
-            >
-              Runeterra
-            </button>
-            <button
-              type="button"
-              onClick={handleTutorialClick}
-              className="px-10 py-3 rounded-md border border-gold/40 text-foreground/90 text-xs font-semibold tracking-[0.15em] uppercase bg-black/40 hover:bg-black/55 hover:border-gold/60 transition-colors cursor-pointer"
-            >
-              Tutorial · clicker
-            </button>
-          </div>
-        </>
-      )}
-    </main>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button
+          onClick={() => navigate("/")}
+          className="px-6 py-2.5 rounded text-[10px] tracking-[0.25em] uppercase transition-opacity opacity-35 hover:opacity-65 cursor-pointer"
+          style={{
+            border: "1px solid #785A2840",
+            color: "#C89B3C",
+            backgroundColor: "transparent",
+          }}
+        >
+          ← El Nexus
+        </button>
+        <SearchButton label="Buscar Partida" onClick={handleSearchClick} />
+      </div>
+    </div>
   );
-};
-
-export default PlayerSlots;
+}
