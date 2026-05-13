@@ -21,8 +21,17 @@ const PlayerSlots = ({ players }: PlayerSlotsProps) => {
     setLoading(true);
 
     setTimeout(() => {
+      clearInterval(1000);
       navigate("/champion-select");
     }, 2000);
+  };
+
+  const handleTutorialClick = () => {
+    navigate("/game");
+  };
+
+  const handleBoardClick = () => {
+    navigate("/runeterra");
   };
 
   return (
@@ -50,8 +59,22 @@ const PlayerSlots = ({ players }: PlayerSlotsProps) => {
             <EmptySlot />
           </div>
 
-          <div className="w-full flex justify-center mt-4 ">
+          <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-4 mt-4 flex-wrap">
             <SearchButton label="Buscar Partida" onClick={handleSearchClick} />
+            <button
+              type="button"
+              onClick={handleBoardClick}
+              className="px-10 py-3 rounded-md border border-accent/55 text-accent-foreground text-xs font-semibold tracking-[0.15em] uppercase bg-gray-950/80 glow-gold hover:border-accent transition-colors cursor-pointer"
+            >
+              Runeterra
+            </button>
+            <button
+              type="button"
+              onClick={handleTutorialClick}
+              className="px-10 py-3 rounded-md border border-gold/40 text-foreground/90 text-xs font-semibold tracking-[0.15em] uppercase bg-black/40 hover:bg-black/55 hover:border-gold/60 transition-colors cursor-pointer"
+            >
+              Tutorial · clicker
+            </button>
           </div>
         </>
       )}

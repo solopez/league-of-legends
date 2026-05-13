@@ -1,21 +1,51 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ChampionSelect from "./components/ChampionSelect";
-import Footer from "./components/Footer";
-import Game from "./components/Game";
-
+const ChampionSelect = React.lazy(() => import("./components/ChampionSelect"));
+const Game = React.lazy(() => import("./components/Game"));
 const GameLobby = React.lazy(() => import("./components/GameLobby"));
+const RuneterraMap = React.lazy(() => import("./components/RuneterraMap"));
+
 
 function App() {
   return (
     <BrowserRouter basename="/league-of-legends">
       <Routes>
-        <Route path="/" element={<GameLobby />} />
-        <Route path="/champion-select" element={<ChampionSelect />} />
-        <Route path="/game" element={<Game />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <GameLobby />
+            </Suspense>
+          }
+        />
+
+        <Route path="/runeterra" element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <RuneterraMap />
+          </Suspense>
+        } />
+
+        <Route
+          path="/champion-select"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <ChampionSelect />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/game"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Game />
+            </Suspense>
+          }
+        />
+
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }
