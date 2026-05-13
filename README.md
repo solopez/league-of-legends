@@ -16,7 +16,7 @@ Mi objetivo es seguir expandiendo el proyecto, manteniéndolo actualizado y agre
 ![champion-selection](https://solopez.github.io/league-of-legends/images/champ-select.png)
 ![champion-selection](https://solopez.github.io/league-of-legends/images/champ-selected.png)
 ![detail page](https://solopez.github.io/league-of-legends/images/game.png)
-![detail page](https://solopez.github.io/league-of-legends/runeterra.jpg)
+![detail page](https://solopez.github.io/league-of-legends/runeterra.png)
 ---
 
 ## ✨ Features
