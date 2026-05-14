@@ -143,7 +143,7 @@ export default function Oraculo() {
     >
       <button
         onClick={() => navigate("/")}
-        className="absolute top-5 left-6 text-[10px] tracking-[0.3em] uppercase opacity-30 hover:opacity-60 transition-opacity z-20"
+        className="absolute top-5 left-6 text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-30 hover:opacity-60 transition-opacity z-20"
         style={{ color: "#C89B3C" }}
       >
         ← El Nexus
@@ -184,7 +184,7 @@ export default function Oraculo() {
                 />
               </div>
               <p
-                className="text-sm leading-relaxed italic"
+                className="text-sm lg:text-lg leading-relaxed italic"
                 style={{ color: "#6a5a7a" }}
               >
                 "Antes de que el mundo tuviera nombre, algo observaba. Responde con
@@ -254,7 +254,7 @@ export default function Oraculo() {
                   whileHover={{ scale: 1.015, borderColor: "#ba68c8" }}
                   whileTap={{ scale: 0.985 }}
                   onClick={() => handleAnswer(ans.path)}
-                  className="w-full py-3.5 px-5 rounded text-sm text-left transition-colors cursor-pointer"
+                  className="w-full py-3.5 px-5 rounded text-sm lg:text-lg text-left transition-colors cursor-pointer"
                   style={{
                     border: "1px solid #2a2a2a",
                     backgroundColor: "rgba(10,10,15,0.7)",
@@ -303,7 +303,7 @@ export default function Oraculo() {
                 className="flex flex-col items-center gap-2"
               >
                 <div
-                  className="text-[10px] tracking-[0.5em] uppercase font-bold"
+                  className="text-[10px] lg:text-sm tracking-[0.5em] uppercase font-bold"
                   style={{ color: result.color }}
                 >
                   El Oráculo ha hablado
@@ -340,7 +340,7 @@ export default function Oraculo() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.75 }}
-                className="text-sm leading-relaxed italic"
+                className="text-sm lg:text-lg leading-relaxed italic"
                 style={{ color: "#A0937D" }}
               >
                 &ldquo;{result.message}&rdquo;

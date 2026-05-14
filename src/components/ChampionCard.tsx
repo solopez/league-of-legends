@@ -67,7 +67,7 @@ export default function ChampionCard({ ddId, name, selected, onClick, index }: C
           />
         </div>
         <span
-          className="text-sm font-bold tracking-widest uppercase text-left"
+          className="text-sm lg:text-base font-bold tracking-widest uppercase text-left"
           style={{ color: selected ? "#F0E6D3" : "#5a5a5a", transition: "color 0.18s" }}
         >
           {name}
@@ -76,7 +76,7 @@ export default function ChampionCard({ ddId, name, selected, onClick, index }: C
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="ml-auto text-[9px] tracking-widest uppercase"
+            className="ml-auto text-[9px] lg:text-xs tracking-widest uppercase"
             style={{ color: "#C89B3C" }}
           >
             ✦

@@ -37,7 +37,7 @@ export default function LoreTimeline() {
 
       <button
         onClick={() => navigate("/")}
-        className="absolute top-5 left-6 z-20 text-[10px] tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
+        className="absolute top-5 left-6 z-20 text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
         style={{ color: "#C89B3C" }}
       >
         ← El Nexus
@@ -58,7 +58,7 @@ export default function LoreTimeline() {
           <span style={{ color: "#C89B3C", fontSize: 10 }}>✦</span>
           <div className="h-px w-20" style={{ background: "linear-gradient(to left, transparent, #C89B3C)" }} />
         </div>
-        <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: "#4a4a4a" }}>
+        <p className="text-[10px] lg:text-sm tracking-[0.35em] uppercase" style={{ color: "#4a4a4a" }}>
           La historia del mundo — desde el origen hasta el presente
         </p>
       </motion.div>
@@ -149,13 +149,14 @@ export default function LoreTimeline() {
               style={{ backgroundColor: "rgba(0,0,0,0.75)" }}
               onClick={() => setSelected(null)}
             />
+            <div className="fixed inset-0 z-40 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.94, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 20 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed z-40 overflow-y-auto"
-              style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "min(600px, 92vw)", maxHeight: "85vh", border: "1px solid #785A28", background: "linear-gradient(160deg, hsl(220 20% 13% / 0.99), hsl(220 20% 7% / 1))", borderRadius: 4 }}
+              className="relative overflow-y-auto pointer-events-auto w-full"
+              style={{ maxWidth: "600px", maxHeight: "85vh", border: "1px solid #785A28", background: "linear-gradient(160deg, hsl(220 20% 13% / 0.99), hsl(220 20% 7% / 1))", borderRadius: 4 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -169,7 +170,7 @@ export default function LoreTimeline() {
                 <img src={`${DD_SPLASH}/${selected.splash}_0.jpg`} alt={selected.title} className="w-full h-full object-cover object-top" style={{ filter: "brightness(0.6) saturate(0.8)" }} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 20%, hsl(220 20% 10%) 100%)" }} />
                 <div className="absolute bottom-4 left-5 right-12">
-                  <p className="text-[10px] tracking-[0.3em] uppercase font-bold mb-1" style={{ color: selected.color }}>
+                  <p className="text-[10px] lg:text-sm tracking-[0.3em] uppercase font-bold mb-1" style={{ color: selected.color }}>
                     {selected.era} · {selected.year}
                   </p>
                   <h2 className="text-xl font-bold tracking-wide uppercase leading-tight" style={{ color: "#F0E6D3" }}>
@@ -179,21 +180,22 @@ export default function LoreTimeline() {
                 </div>
               </div>
               <div className="p-5 flex flex-col gap-4">
-                <p className="text-sm leading-relaxed" style={{ color: "#A0937D" }}>{selected.fullDesc}</p>
+                <p className="text-sm lg:text-base leading-relaxed" style={{ color: "#A0937D" }}>{selected.fullDesc}</p>
                 <div className="h-px" style={{ background: "linear-gradient(to right, #785A28 20%, transparent)" }} />
                 <div>
-                  <p className="text-[10px] tracking-[0.3em] uppercase font-bold mb-3" style={{ color: "#C89B3C" }}>Campeones relacionados</p>
+                  <p className="text-[10px] lg:text-sm tracking-[0.3em] uppercase font-bold mb-3" style={{ color: "#C89B3C" }}>Campeones relacionados</p>
                   <div className="flex gap-3 flex-wrap">
                     {selected.champions.map((champ, i) => (
                       <motion.div key={champ.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} className="flex flex-col items-center gap-1">
                         <ModalPortrait id={champ.id} name={champ.name} baseUrl={DD} accentColor={selected.color} />
-                        <span className="text-[9px] tracking-wide" style={{ color: "#5a5a5a" }}>{champ.name}</span>
+                        <span className="text-[9px] lg:text-xs tracking-wide" style={{ color: "#5a5a5a" }}>{champ.name}</span>
                       </motion.div>
                     ))}
                   </div>
                 </div>
               </div>
             </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
@@ -218,13 +220,13 @@ function EventCard({ event, above, onClick }: { event: TimelineEvent; above: boo
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, hsl(220 20% 10%) 100%)" }} />
         <div className="absolute bottom-2 left-3 flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: event.color }} />
-          <span className="text-[9px] tracking-[0.25em] uppercase font-bold" style={{ color: event.color }}>{event.era}</span>
+          <span className="text-[9px] lg:text-xs tracking-[0.25em] uppercase font-bold" style={{ color: event.color }}>{event.era}</span>
         </div>
       </div>
       <div className="p-3 flex flex-col gap-1.5">
         <h3 className="text-xs font-bold tracking-wide uppercase leading-tight" style={{ color: "#F0E6D3" }}>{event.title}</h3>
-        <p className="text-[10px] leading-relaxed" style={{ color: "#6a6a6a" }}>{event.shortDesc}</p>
-        <p className="text-[9px] tracking-widest uppercase mt-1 transition-colors duration-200" style={{ color: hovered ? event.color : "#3a3a3a" }}>Leer más →</p>
+        <p className="text-[10px] lg:text-sm leading-relaxed" style={{ color: "#6a6a6a" }}>{event.shortDesc}</p>
+        <p className="text-[9px] lg:text-xs tracking-widest uppercase mt-1 transition-colors duration-200" style={{ color: hovered ? event.color : "#3a3a3a" }}>Leer más →</p>
       </div>
     </motion.div>
   );

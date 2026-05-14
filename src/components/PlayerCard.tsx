@@ -80,13 +80,13 @@ export default function PlayerCard({ nick, description, modelSource, splashId }:
         <div className="flex items-center gap-2">
           <Crown className="w-3 h-3 flex-shrink-0" style={{ color: "#C89B3C" }} />
           <span
-            className="text-sm font-bold tracking-widest uppercase truncate"
+            className="text-sm lg:text-base font-bold tracking-widest uppercase truncate"
             style={{ color: "#F0E6D3" }}
           >
             {nick}
           </span>
         </div>
-        <span className="text-[11px] tracking-wide" style={{ color: "#6a5a4a" }}>
+        <span className="text-[11px] lg:text-sm tracking-wide" style={{ color: "#6a5a4a" }}>
           {description}
         </span>
         <div className="flex items-center gap-1.5 mt-2">

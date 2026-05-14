@@ -44,7 +44,7 @@ export default function GameLobby() {
       >
         <button
           onClick={() => navigate("/")}
-          className="text-[10px] tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
+          className="text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
           style={{ color: "#C89B3C" }}
         >
           ← El Nexus
@@ -52,7 +52,7 @@ export default function GameLobby() {
         <div className="flex items-center gap-2">
           <Timer className="w-3.5 h-3.5" style={{ color: "#785A28" }} />
           <span
-            className="text-[10px] tracking-[0.25em] uppercase"
+            className="text-[10px] lg:text-sm tracking-[0.25em] uppercase"
             style={{ color: "#785A28" }}
           >
             GI · URFAR · Aleatorio
@@ -76,7 +76,7 @@ export default function GameLobby() {
           <span style={{ color: "#C89B3C", fontSize: 10 }}>✦</span>
           <div className="h-px w-16" style={{ background: "linear-gradient(to left, transparent, #C89B3C)" }} />
         </div>
-        <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: "#3a3a3a" }}>
+        <p className="text-[9px] lg:text-xs tracking-[0.35em] uppercase" style={{ color: "#3a3a3a" }}>
           Preparate para la batalla
         </p>
       </motion.div>

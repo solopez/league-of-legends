@@ -10,6 +10,7 @@ const ChampionQuiz    = React.lazy(() => import("./components/ChampionQuiz"));
 const ChampionExplorer = React.lazy(() => import("./components/ChampionExplorer"));
 const Oraculo          = React.lazy(() => import("./components/Oraculo"));
 const Sanctum          = React.lazy(() => import("./components/Sanctum"));
+const PatchSkins       = React.lazy(() => import("./components/PatchSkins"));
 
 function App() {
   return (
@@ -85,6 +86,7 @@ function App() {
 
         <Route path="/oraculo" element={<Suspense fallback={<div>Loading...</div>}><Oraculo /></Suspense>} />
         <Route path="/sanctum" element={<Suspense fallback={<div>Loading...</div>}><Sanctum /></Suspense>} />
+        <Route path="/patch" element={<Suspense fallback={<div>Loading...</div>}><PatchSkins /></Suspense>} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

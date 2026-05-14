@@ -51,7 +51,7 @@ export default function RuneterraMap() {
 
       <button
         onClick={() => navigate("/")}
-        className="absolute top-5 left-6 z-20 text-[10px] tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
+        className="absolute top-5 left-6 z-20 text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
         style={{ color: "#C89B3C" }}
       >
         ← El Nexus
@@ -72,7 +72,7 @@ export default function RuneterraMap() {
           <span style={{ color: "#C89B3C", fontSize: 10 }}>✦</span>
           <div className="h-px w-20" style={{ background: "linear-gradient(to left, transparent, #C89B3C)" }} />
         </div>
-        <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: "#4a4a4a" }}>
+        <p className="text-[10px] lg:text-sm tracking-[0.35em] uppercase" style={{ color: "#4a4a4a" }}>
           Explora las regiones del mundo
         </p>
       </motion.div>
@@ -93,7 +93,7 @@ export default function RuneterraMap() {
             {hovered === region.id && (
               <motion.div
                 className="absolute rounded-full border"
-                style={{ borderColor: region.color, inset: -6 }}
+                style={{ borderColor: region.color, inset: -10 }}
                 initial={{ scale: 0.9, opacity: 0.7 }}
                 animate={{ scale: 2, opacity: 0 }}
                 exit={{ opacity: 0 }}
@@ -103,16 +103,16 @@ export default function RuneterraMap() {
           </AnimatePresence>
 
           <motion.div
-            className="w-3 h-3 rounded-full border-2"
+            className="w-6 h-6 rounded-full border-2"
             style={{ backgroundColor: region.color + "22", borderColor: region.color }}
             animate={{
-              scale: hovered === region.id ? 1.5 : selected?.id === region.id ? 1.3 : 1,
+              scale: hovered === region.id ? 1.4 : selected?.id === region.id ? 1.2 : 1,
               boxShadow:
                 hovered === region.id
-                  ? `0 0 14px 4px ${region.color}55`
+                  ? `0 0 18px 6px ${region.color}55`
                   : selected?.id === region.id
-                  ? `0 0 10px 2px ${region.color}40`
-                  : `0 0 4px 1px ${region.color}25`,
+                  ? `0 0 12px 3px ${region.color}40`
+                  : `0 0 6px 2px ${region.color}25`,
             }}
             transition={{ duration: 0.15 }}
           />
@@ -124,10 +124,10 @@ export default function RuneterraMap() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 5 }}
                 transition={{ duration: 0.13 }}
-                className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none"
+                className="absolute top-8 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none"
               >
                 <span
-                  className="text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded"
+                  className="text-[9px] lg:text-xs font-bold tracking-widest uppercase px-2 py-0.5 rounded"
                   style={{ backgroundColor: "rgba(5,5,10,0.9)", border: `1px solid ${region.color}50`, color: "#F0E6D3" }}
                 >
                   {region.name}
@@ -191,12 +191,12 @@ export default function RuneterraMap() {
             </div>
 
             <div className="p-4 flex flex-col gap-4">
-              <p className="text-sm leading-relaxed" style={{ color: "#A0937D" }}>
+              <p className="text-sm lg:text-base leading-relaxed" style={{ color: "#A0937D" }}>
                 {selected.lore}
               </p>
               <div className="h-px" style={{ background: "linear-gradient(to right, #785A28 20%, transparent 100%)" }} />
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase font-bold mb-3" style={{ color: "#C89B3C" }}>
+                <p className="text-[10px] lg:text-sm tracking-[0.3em] uppercase font-bold mb-3" style={{ color: "#C89B3C" }}>
                   Campeones destacados
                 </p>
                 <div className="grid grid-cols-3 gap-2">
@@ -209,7 +209,7 @@ export default function RuneterraMap() {
                       className="flex flex-col items-center gap-1 cursor-default"
                     >
                       <ChampionPortrait id={champ.id} name={champ.name} baseUrl={DD} accentColor={selected.color} />
-                      <span className="text-[9px] tracking-wide text-center leading-tight" style={{ color: "#5a5a5a" }}>
+                      <span className="text-[9px] lg:text-xs tracking-wide text-center leading-tight" style={{ color: "#5a5a5a" }}>
                         {champ.name}
                       </span>
                     </motion.div>

@@ -38,7 +38,7 @@ export default function Loading() {
             Buscando Partida
           </span>
           <span
-            className="text-[9px] tracking-[0.3em] uppercase"
+            className="text-[9px] lg:text-xs tracking-[0.3em] uppercase"
             style={{ color: "#3a3a3a" }}
           >
             Preparando el Nexus...

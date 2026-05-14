@@ -45,7 +45,7 @@ export default function ChampionSelect() {
       >
         <button
           onClick={() => navigate("/lobby")}
-          className="text-[10px] tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
+          className="text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
           style={{ color: "#C89B3C" }}
         >
           ← El Lobby
@@ -145,7 +145,7 @@ export default function ChampionSelect() {
                 </div>
 
                 <p
-                  className="text-sm leading-relaxed max-w-md"
+                  className="text-sm lg:text-base leading-relaxed max-w-md"
                   style={{ color: "#7a6a58" }}
                 >
                   {champ.history}
@@ -153,7 +153,7 @@ export default function ChampionSelect() {
 
                 <div>
                   <p
-                    className="text-[9px] tracking-[0.3em] uppercase font-bold mb-3"
+                    className="text-[9px] lg:text-xs tracking-[0.3em] uppercase font-bold mb-3"
                     style={{ color: "#C89B3C" }}
                   >
                     Habilidades
@@ -165,7 +165,7 @@ export default function ChampionSelect() {
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.07 }}
-                        className="px-3 py-1 rounded text-[10px] tracking-wide"
+                        className="px-3 py-1 rounded text-[10px] lg:text-sm tracking-wide"
                         style={{
                           border: "1px solid rgba(200,155,60,0.25)",
                           color: "#A0937D",
@@ -197,7 +197,7 @@ export default function ChampionSelect() {
           style={{ borderLeft: "1px solid rgba(120,90,40,0.15)" }}
         >
           <p
-            className="text-[9px] tracking-[0.35em] uppercase mb-4 text-center md:text-left"
+            className="text-[9px] lg:text-xs tracking-[0.35em] uppercase mb-4 text-center md:text-left"
             style={{ color: "#3a3a3a" }}
           >
             {CHAMPION_LIST.length} campeones disponibles

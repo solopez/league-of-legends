@@ -96,7 +96,7 @@ export default function Sanctum() {
 
       <button
         onClick={() => navigate("/")}
-        className="absolute top-5 left-6 text-[10px] tracking-[0.3em] uppercase opacity-25 hover:opacity-55 transition-opacity z-20"
+        className="absolute top-5 left-6 text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-25 hover:opacity-55 transition-opacity z-20"
         style={{ color: "#C89B3C" }}
       >
         ← El Nexus
@@ -160,7 +160,7 @@ export default function Sanctum() {
                 {secret.title}
               </h2>
               <div
-                className="text-[9px] tracking-[0.4em] uppercase"
+                className="text-[9px] lg:text-xs tracking-[0.4em] uppercase"
                 style={{ color: "#2a2a2a" }}
               >
                 {index + 1} / {SECRETS.length}
@@ -168,7 +168,7 @@ export default function Sanctum() {
             </div>
 
             <p
-              className="text-sm leading-[1.9] italic"
+              className="text-sm lg:text-lg leading-[1.9] italic"
               style={{ color: "#7a6a5a" }}
             >
               &ldquo;{secret.text}&rdquo;
@@ -196,7 +196,7 @@ export default function Sanctum() {
               >
                 El Sanctum ha hablado
               </h2>
-              <p className="text-sm italic leading-relaxed" style={{ color: "#4a3a2a" }}>
+              <p className="text-sm lg:text-base italic leading-relaxed" style={{ color: "#4a3a2a" }}>
                 &ldquo;Lo que sabés ahora no puede olvidarse. Pero hay más verdades esperando — en los rincones del mundo que todavía no visitaste.&rdquo;
               </p>
             </div>

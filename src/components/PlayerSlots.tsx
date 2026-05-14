@@ -44,7 +44,7 @@ export default function PlayerSlots({ players }: { players: Player[] }) {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           onClick={() => navigate("/")}
-          className="px-6 py-2.5 rounded text-[10px] tracking-[0.25em] uppercase transition-opacity opacity-35 hover:opacity-65 cursor-pointer"
+          className="px-6 py-2.5 rounded text-[10px] lg:text-sm tracking-[0.25em] uppercase transition-opacity opacity-35 hover:opacity-65 cursor-pointer"
           style={{
             border: "1px solid #785A2840",
             color: "#C89B3C",

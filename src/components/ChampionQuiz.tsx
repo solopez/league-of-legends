@@ -133,7 +133,7 @@ export default function ChampionQuiz() {
       <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 pt-5">
         <button
           onClick={() => navigate("/")}
-          className="text-[10px] tracking-[0.3em] uppercase transition-opacity opacity-35 hover:opacity-65"
+          className="text-[10px] lg:text-sm tracking-[0.3em] uppercase transition-opacity opacity-35 hover:opacity-65"
           style={{ color: "#C89B3C" }}
         >
           ← El Nexus
@@ -147,7 +147,7 @@ export default function ChampionQuiz() {
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
-                className="text-[10px] tracking-widest uppercase"
+                className="text-[10px] lg:text-sm tracking-widest uppercase"
                 style={{ color: "#ffa726" }}
               >
                 🔥 {streak} en racha
@@ -157,7 +157,7 @@ export default function ChampionQuiz() {
 
           <div className="text-right">
             <div
-              className="text-[9px] tracking-[0.3em] uppercase"
+              className="text-[9px] lg:text-xs tracking-[0.3em] uppercase"
               style={{ color: "#785A28" }}
             >
               Puntos
@@ -202,7 +202,7 @@ export default function ChampionQuiz() {
             style={{ background: "linear-gradient(to right, transparent, #C89B3C)" }}
           />
           <span
-            className="text-[10px] tracking-[0.45em] uppercase font-bold"
+            className="text-[10px] lg:text-sm tracking-[0.45em] uppercase font-bold"
             style={{ color: "#C89B3C" }}
           >
             ¿ Quién soy ?
@@ -254,7 +254,7 @@ export default function ChampionQuiz() {
             onClick={() => setCluesRevealed((c) => c + 1)}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="px-5 py-2 rounded text-[10px] tracking-widest uppercase"
+            className="px-5 py-2 rounded text-[10px] lg:text-sm tracking-widest uppercase"
             style={{
               border: "1px solid rgba(200,155,60,0.22)",
               color: "#785A28",
@@ -291,7 +291,7 @@ export default function ChampionQuiz() {
                   >
                     ¡Correcto!
                   </div>
-                  <div className="text-[10px]" style={{ color: "#5a5a5a" }}>
+                  <div className="text-[10px] lg:text-sm" style={{ color: "#5a5a5a" }}>
                     {current.region}
                   </div>
                 </>
@@ -365,7 +365,7 @@ export default function ChampionQuiz() {
 
         {phase === "playing" && (
           <p
-            className="text-center text-[9px] tracking-widest uppercase mt-2"
+            className="text-center text-[9px] lg:text-xs tracking-widest uppercase mt-2"
             style={{ color: "#2a2a2a" }}
           >
             Respuesta correcta ahora · {currentPoints} pts
@@ -434,7 +434,7 @@ function FinishedScreen({
           />
           <span style={{ color: "#C89B3C", fontSize: 10 }}>✦</span>
           <span
-            className="text-[10px] tracking-[0.4em] uppercase"
+            className="text-[10px] lg:text-sm tracking-[0.4em] uppercase"
             style={{ color: "#C89B3C" }}
           >
             Resultado Final

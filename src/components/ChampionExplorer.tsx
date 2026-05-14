@@ -74,7 +74,7 @@ export default function ChampionExplorer() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate("/")}
-              className="text-[10px] tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
+              className="text-[10px] lg:text-sm tracking-[0.3em] uppercase opacity-35 hover:opacity-65 transition-opacity"
               style={{ color: "#C89B3C" }}
             >
               ← El Nexus
@@ -102,7 +102,7 @@ export default function ChampionExplorer() {
             </div>
           </div>
           <span
-            className="text-[10px] tracking-widest"
+            className="text-[10px] lg:text-sm tracking-widest"
             style={{ color: "#3a3a3a" }}
           >
             {filtered.length} campeones
@@ -225,7 +225,7 @@ export default function ChampionExplorer() {
                     style={{ backgroundColor: selected.regionColor }}
                   />
                   <span
-                    className="text-[9px] tracking-[0.3em] uppercase font-bold"
+                    className="text-[9px] lg:text-xs tracking-[0.3em] uppercase font-bold"
                     style={{ color: selected.regionColor }}
                   >
                     {selected.regionName}
@@ -273,7 +273,7 @@ export default function ChampionExplorer() {
 
               <div>
                 <p
-                  className="text-[10px] tracking-[0.3em] uppercase font-bold mb-3"
+                  className="text-[10px] lg:text-sm tracking-[0.3em] uppercase font-bold mb-3"
                   style={{ color: "#C89B3C" }}
                 >
                   De {selected.regionName}
@@ -310,7 +310,7 @@ export default function ChampionExplorer() {
 
               <button
                 onClick={() => navigate("/runeterra")}
-                className="w-full py-2.5 rounded text-[10px] tracking-widest uppercase font-bold transition-opacity hover:opacity-75"
+                className="w-full py-2.5 rounded text-[10px] lg:text-sm tracking-widest uppercase font-bold transition-opacity hover:opacity-75"
                 style={{
                   border: `1px solid ${selected.regionColor}50`,
                   color: selected.regionColor,
@@ -341,7 +341,7 @@ function FilterTab({
   return (
     <button
       onClick={onClick}
-      className="flex-shrink-0 px-3 py-1.5 rounded text-[9px] tracking-[0.2em] uppercase font-bold transition-all duration-200 cursor-pointer"
+      className="flex-shrink-0 px-3 py-1.5 rounded text-[9px] lg:text-xs tracking-[0.2em] uppercase font-bold transition-all duration-200 cursor-pointer"
       style={{
         border: `1px solid ${active ? color : "#2a2a2a"}`,
         backgroundColor: active ? `${color}18` : "transparent",
