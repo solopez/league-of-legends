@@ -8,7 +8,8 @@ Arranca como un cliente de lobby y fue creciendo hasta convertirse en una experi
 > ⚠️ Este proyecto es **fan-made** y no tiene ninguna afiliación oficial con Riot Games.  
 > Todos los assets, datos de campeones y skins pertenecen a Riot Games.
 
-![Hub principal](https://solopez.github.io/league-of-legends/images/loading.png)
+<img width="682" height="455" alt="image" src="https://github.com/user-attachments/assets/c2e9edc7-37f3-41ad-9f77-f41c19ac124b" />
+
 
 ---
 
