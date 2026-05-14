@@ -9,7 +9,8 @@ Arranca como un cliente de lobby y fue creciendo hasta convertirse en una experi
 > Todos los assets, datos de campeones y skins pertenecen a Riot Games.
 
 <img width="1428" height="1100" alt="image" src="https://github.com/user-attachments/assets/22e3a70a-a175-4742-a755-912c479cd3bc" />
-<img width="1429" height="1092" alt="image" src="https://github.com/user-attachments/assets/65628089-7591-46e6-9a15-a19e3de9d78d" />
+
+<img width="1428" height="1097" alt="image" src="https://github.com/user-attachments/assets/9c2c36b5-47d4-4127-964f-12bec3042789" />
 
 <img width="1431" height="1088" alt="image" src="https://github.com/user-attachments/assets/86e154a0-1b7a-4f3b-91a7-4190796cd9f7" />
 
