@@ -1,7 +1,7 @@
 # League of Legends – El Nexus
 
 Proyecto frontend desarrollado en **React** inspirado en el universo de **League of Legends**.  
-Arranca como un cliente de lobby y fue creciendo hasta convertirse en una experiencia completa: lore, exploración, quizzes, catálogo de skins en vivo y secretos desbloqueables.
+Arranca como un cliente de lobby y fue creciendo hasta convertirse en una experiencia completa: lore, exploración, catálogo de skins en tiempo real.
 
 🌐 **Demo en producción:** https://solopez.github.io/league-of-legends
 
@@ -40,17 +40,9 @@ Cronología del lore de Runeterra con eventos históricos. Cada evento abre un m
 ### 🧭 Explorador de Campeones
 Catálogo completo de campeones con búsqueda, filtro por región y ficha detallada con habilidades.
 
-### 🧩 Quiz · ¿Quién soy?
-Adivinar el campeón a partir de pistas progresivas. Puntuación por velocidad de respuesta.
-
 ### 🎨 Catálogo de Skins · Parche actual
 Catálogo en vivo de **todas las skins** del juego, con detección automática de las nuevas en el parche actual. Filtros por rareza (Épica, Legendaria, Mítica, Ultimate, Legacy), buscador, paginación y modal de splash art. Datos obtenidos de **Community Dragon** en una sola request.
 
-### 🔮 El Oráculo *(desbloqueable)*
-Quiz de personalidad de 3 preguntas que te asigna un arquetipo (Guerrero, Sabio, Explorador, Observador) y te redirige a la región que te corresponde. Se desbloquea al visitar varias secciones.
-
-### ◈ El Sanctum *(desbloqueable)*
-Colección de 7 secretos del lore de Runeterra, presentados como revelaciones con animaciones. Se desbloquea al completar el Oráculo.
 
 ---
 
@@ -86,12 +78,9 @@ src/
 │   ├── GameLobby       # Lobby de partida
 │   ├── ChampionSelect  # Selección de campeones
 │   ├── ChampionExplorer# Catálogo de campeones
-│   ├── ChampionQuiz    # Quiz ¿Quién soy?
 │   ├── RuneterraMap    # Mapa interactivo
 │   ├── LoreTimeline    # Línea del tiempo
 │   ├── PatchSkins      # Catálogo de skins en vivo
-│   ├── Oraculo         # Quiz de personalidad (secreto)
-│   ├── Sanctum         # Colección de secretos (secreto)
 │   └── Game            # Partida 1v1
 ├── constants/
 │   └── cdn.ts          # URLs centralizadas de APIs

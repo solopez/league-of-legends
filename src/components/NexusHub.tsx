@@ -1,70 +1,89 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { getVisited, isOraculoUnlocked, isSanctumUnlocked } from "../utils/visited";
 
-interface Prophecy {
+interface Section {
   id: string;
-  text: string;
-  reveal: string;
   route: string;
-  color: string;
-  special?: boolean;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  splash: string;       // ddragon splash URL — loads fine in-browser
+  accent: string;
+  overlayFrom: string;  // dark gradient color for text legibility
 }
 
-const PROPHECIES: Prophecy[] = [
+const SECTIONS: Section[] = [
+  {
+    id: "patch",
+    route: "/patch",
+    eyebrow: "Parche actual · Live",
+    title: "Nuevas Skins",
+    subtitle:
+      "Catálogo completo de skins recién llegadas. Rarezas, ediciones limitadas y los diseños que acaban de aterrizar en Runeterra.",
+    cta: "Ver skins",
+    splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg",
+    accent: "#C89B3C",
+    overlayFrom: "rgba(30,15,0,0.82)",
+  },
   {
     id: "runeterra",
-    text: "El mundo espera ser descubierto...",
-    reveal: "Mapa de Runeterra",
     route: "/runeterra",
-    color: "#ffa726",
+    eyebrow: "Exploración",
+    title: "Mapa de Runeterra",
+    subtitle:
+      "Un continente forjado por magia y guerra. Descubrí cada región, sus secretos y los campeones que las habitan.",
+    cta: "Explorar mapa",
+    splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",
+    accent: "#4fc3f7",
+    overlayFrom: "rgba(0,15,30,0.82)",
   },
   {
     id: "lore",
-    text: "La historia no muere. Solo se congela.",
-    reveal: "Línea del Tiempo",
     route: "/lore",
-    color: "#ce93d8",
+    eyebrow: "Historia",
+    title: "Línea del Tiempo",
+    subtitle:
+      "Desde la fundación de Demacia hasta la Ruina. La historia de Runeterra contada en orden cronológico.",
+    cta: "Ver historia",
+    splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Thresh_0.jpg",
+    accent: "#ce93d8",
+    overlayFrom: "rgba(15,0,30,0.85)",
   },
   {
     id: "champions",
-    text: "Los héroes no se eligen. Se revelan.",
-    reveal: "Los Campeones",
     route: "/champions",
-    color: "#ef5350",
-  },
-  {
-    id: "quiz",
-    text: "El que conoce no puede ser vencido.",
-    reveal: "Quiz · ¿Quién soy?",
-    route: "/quiz",
-    color: "#C89B3C",
+    eyebrow: "Campeones",
+    title: "Los Campeones",
+    subtitle:
+      "Más de 160 campeones esperan ser descubiertos. Explorá habilidades, lore y estadísticas de cada uno.",
+    cta: "Ver campeones",
+    splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
+    accent: "#ef5350",
+    overlayFrom: "rgba(30,0,0,0.82)",
   },
   {
     id: "lobby",
-    text: "La batalla comienza donde todo termina.",
-    reveal: "El Lobby",
     route: "/lobby",
-    color: "#4fc3f7",
+    eyebrow: "Partida",
+    title: "El Lobby",
+    subtitle:
+      "Elegí tu campeón, definí tu rol y prepará tu estrategia. La batalla empieza antes de la primera oleada.",
+    cta: "Ir al lobby",
+    splash: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg",
+    accent: "#66bb6a",
+    overlayFrom: "rgba(0,20,0,0.82)",
   },
 ];
 
-const ORACULO_PROPHECY: Prophecy = {
-  id: "oraculo",
-  text: "Algo antiguo te ha estado observando desde las sombras.",
-  reveal: "El Oráculo",
-  route: "/oraculo",
-  color: "#ba68c8",
-  special: true,
-};
-
 export default function NexusHub() {
   const navigate = useNavigate();
-  const visited = useState(() => getVisited())[0];
-  const oraculoUnlocked = useState(() => isOraculoUnlocked())[0];
-  const sanctumUnlocked = useState(() => isSanctumUnlocked())[0];
+  const [active, setActive] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const [direction, setDirection] = useState<1 | -1>(1);
   const [currentPatch, setCurrentPatch] = useState<string | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     fetch("https://ddragon.leagueoflegends.com/api/versions.json")
@@ -76,260 +95,297 @@ export default function NexusHub() {
       .catch(() => {});
   }, []);
 
+  // Preload all splash images
+  useEffect(() => {
+    SECTIONS.forEach((s, i) => {
+      const img = new Image();
+      img.onload = () => setImagesLoaded((prev) => ({ ...prev, [i]: true }));
+      img.src = s.splash;
+    });
+  }, []);
+
+  const goTo = useCallback(
+    (idx: number) => {
+      if (idx === active) return;
+      setDirection(idx > active ? 1 : -1);
+      setPrev(active);
+      setActive(idx);
+    },
+    [active]
+  );
+
+  const goNext = () => goTo((active + 1) % SECTIONS.length);
+  const goPrev = () => goTo((active - 1 + SECTIONS.length) % SECTIONS.length);
+
+  // Keyboard nav
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [active]);
+
+  const section = SECTIONS[active];
+
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center"
-      style={{ backgroundColor: "#0A0A0F" }}
-    >
+    <div className="relative w-full h-screen overflow-hidden bg-black">
+
+      {/* ── BACKGROUND LAYERS ─────────────────────────────── */}
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={`bg-${active}`}
+          initial={{ opacity: 0, scale: 1.06, x: direction * 40 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          exit={{ opacity: 0, scale: 0.97 }}
+          transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${section.splash})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            // Fallback color while image loads
+            backgroundColor: "#0a0a0f",
+          }}
+        />
+      </AnimatePresence>
+
+      {/* Gradient overlays for legibility */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: [
-            "radial-gradient(ellipse 70% 55% at 50% 25%, rgba(200,155,60,0.055) 0%, transparent 65%)",
-            "radial-gradient(ellipse 35% 35% at 15% 85%, rgba(120,90,190,0.03) 0%, transparent 100%)",
-          ].join(", "),
+          background: `
+            linear-gradient(to right, ${section.overlayFrom} 0%, rgba(0,0,0,0.3) 60%, transparent 100%),
+            linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)
+          `,
+          transition: "background 0.6s ease",
         }}
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: -18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="flex flex-col items-center gap-2 mb-14"
-      >
-        <motion.span
-          animate={{ opacity: [0.35, 1, 0.35] }}
-          transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ color: "#C89B3C", fontSize: 13 }}
-        >
-          ✦
-        </motion.span>
-        <h1
-          className="text-3xl lg:text-4xl font-bold tracking-[0.55em] uppercase"
-          style={{ color: "#F0E6D3" }}
-        >
-          El Nexus
-        </h1>
-        <div
-          className="h-px w-40 mt-1"
-          style={{
-            background:
-              "linear-gradient(to right, transparent, #785A28 35%, #785A28 65%, transparent)",
-          }}
-        />
-      </motion.div>
+      {/* Subtle vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%)",
+        }}
+      />
 
-      <div className="flex flex-col items-center w-full max-w-xl px-6 gap-3">
-        {PROPHECIES.map((p, i) => (
-          <ProphecyLine
-            key={p.id}
-            prophecy={p}
-            index={i}
-            visited={visited.includes(p.id as "runeterra" | "lore" | "champions" | "quiz")}
-            onClick={() => navigate(p.route)}
-          />
-        ))}
-
+      {/* ── HEADER ────────────────────────────────────────── */}
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-8 lg:px-14 pt-8">
         <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 1.4, duration: 0.7 }}
-          className="w-4/5 h-px my-3"
-          style={{
-            background:
-              "linear-gradient(to right, transparent, #1e1e1e 30%, #1e1e1e 70%, transparent)",
-          }}
-        />
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col"
+        >
+          <h1
+            className="text-xl lg:text-2xl font-bold tracking-[0.5em] uppercase"
+            style={{ color: "#F0E6D3", textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}
+          >
+            El Nexus
+          </h1>
+          <span
+            className="text-[9px] tracking-[0.35em] uppercase mt-0.5"
+            style={{ color: "rgba(200,155,60,0.6)" }}
+          >
+            Fan-made · No afiliado con Riot Games
+          </span>
+        </motion.div>
 
-        <PatchBanner patch={currentPatch} onClick={() => navigate("/patch")} />
-
-        <AnimatePresence>
-          {oraculoUnlocked && (
-            <motion.div
-              key="oraculo"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="w-full"
+        {currentPatch && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex items-center gap-2 px-3 py-1.5 rounded"
+            style={{
+              border: "1px solid rgba(200,155,60,0.4)",
+              background: "rgba(0,0,0,0.4)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <motion.span
+              animate={{ opacity: [1, 0.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ backgroundColor: "#C89B3C" }}
+            />
+            <span
+              className="text-[10px] font-medium tracking-[0.25em] uppercase"
+              style={{ color: "#C89B3C" }}
             >
-              <ProphecyLine
-                prophecy={ORACULO_PROPHECY}
-                index={0}
-                onClick={() => navigate("/oraculo")}
+              Parche {currentPatch}
+            </span>
+          </motion.div>
+        )}
+      </div>
+
+      {/* ── MAIN CONTENT ──────────────────────────────────── */}
+      {/* Positioned in the lower-middle third, well above the bottom nav */}
+      <div
+        className="absolute z-10 px-8 lg:px-14 pointer-events-none"
+        style={{ bottom: "22vh", left: 0, right: 0 }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`content-${active}`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="max-w-xl pointer-events-auto"
+          >
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="h-px w-8"
+                style={{ backgroundColor: section.accent }}
               />
-            </motion.div>
-          )}
+              <span
+                className="text-[11px] font-medium tracking-[0.3em] uppercase"
+                style={{ color: section.accent }}
+              >
+                {section.eyebrow}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h2
+              className="font-bold leading-none mb-5 tracking-tight"
+              style={{
+                fontSize: "clamp(42px, 7vw, 80px)",
+                color: "#F0E6D3",
+                textShadow: "0 4px 24px rgba(0,0,0,0.7)",
+              }}
+            >
+              {section.title}
+            </h2>
+
+            {/* Subtitle */}
+            <p
+              className="text-sm lg:text-base leading-relaxed mb-7 max-w-sm"
+              style={{
+                color: "rgba(240,230,211,0.72)",
+                textShadow: "0 2px 8px rgba(0,0,0,0.8)",
+              }}
+            >
+              {section.subtitle}
+            </p>
+
+            {/* CTA */}
+            <button
+              onClick={() => navigate(section.route)}
+              className="flex items-center gap-3 px-7 py-3 text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-200 rounded"
+              style={{
+                background: section.accent,
+                color: "#0a0a0f",
+                border: "none",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.opacity = "0.85";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.opacity = "1";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+              }}
+            >
+              {section.cta}
+              <span style={{ fontSize: 16 }}>→</span>
+            </button>
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      <AnimatePresence>
-        {sanctumUnlocked && (
-          <motion.button
-            key="sanctum"
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, type: "spring", stiffness: 80 }}
-            onClick={() => navigate("/sanctum")}
-            className="absolute bottom-12"
-            title="..."
-          >
-            <motion.span
-              animate={{
-                opacity: [0.3, 0.85, 0.3],
-                textShadow: [
-                  "0 0 6px rgba(200,155,60,0.2)",
-                  "0 0 22px rgba(200,155,60,0.75)",
-                  "0 0 6px rgba(200,155,60,0.2)",
-                ],
-              }}
-              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-              style={{ color: "#C89B3C", fontSize: 26, display: "block" }}
-            >
-              ◈
-            </motion.span>
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {/* ── BOTTOM CONTROLS ───────────────────────────────── */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between px-8 lg:px-14 pb-6">
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-4 text-[9px] lg:text-xs tracking-[0.2em] uppercase"
-        style={{ color: "#1a1a1a" }}
+        {/* Section tabs */}
+        <div className="flex flex-col gap-2">
+          {SECTIONS.map((s, idx) => (
+            <button
+              key={s.id}
+              onClick={() => goTo(idx)}
+              className="flex items-center gap-3 group transition-all duration-200"
+            >
+              {/* Active bar */}
+              <motion.div
+                animate={{
+                  width: idx === active ? 32 : 12,
+                  opacity: idx === active ? 1 : 0.35,
+                }}
+                transition={{ duration: 0.3 }}
+                className="h-px"
+                style={{ backgroundColor: idx === active ? s.accent : "#F0E6D3" }}
+              />
+              <span
+                className="text-[10px] lg:text-xs font-medium tracking-[0.2em] uppercase transition-all duration-200"
+                style={{
+                  color:
+                    idx === active
+                      ? s.accent
+                      : "rgba(240,230,211,0.35)",
+                }}
+              >
+                {s.title}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Prev / Next arrows */}
+        <div className="flex gap-3 items-center">
+          <NavArrow onClick={goPrev} label="Anterior" dir="left" accent={section.accent} />
+          <NavArrow onClick={goNext} label="Siguiente" dir="right" accent={section.accent} />
+        </div>
+      </div>
+
+      {/* ── SECTION INDEX (top right) ─────────────────────── */}
+      <div
+        className="absolute top-20 right-8 lg:right-14 z-20 text-right"
+        style={{ color: "rgba(240,230,211,0.25)" }}
       >
-        Fan-made · No afiliado con Riot Games
-      </motion.p>
+        <span className="text-4xl font-bold" style={{ letterSpacing: "-0.02em" }}>
+          0{active + 1}
+        </span>
+        <span className="text-lg"> / 0{SECTIONS.length}</span>
+      </div>
     </div>
   );
 }
 
-function PatchBanner({ patch, onClick }: { patch: string | null; onClick: () => void }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <motion.button
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.6, duration: 0.6 }}
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="w-full flex items-center gap-4 px-5 py-4 rounded cursor-pointer"
-      style={{
-        border: `1px solid ${hovered ? "#C89B3C" : "#785A2855"}`,
-        background: hovered
-          ? "linear-gradient(135deg, rgba(200,155,60,0.1) 0%, rgba(200,155,60,0.03) 100%)"
-          : "linear-gradient(135deg, rgba(200,155,60,0.06) 0%, rgba(200,155,60,0.01) 100%)",
-        transition: "border-color 0.22s, background 0.22s",
-      }}
-    >
-      <div className="relative flex-shrink-0 w-6 h-6 flex items-center justify-center">
-        <motion.div
-          animate={{ scale: [1, 2.2, 1], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
-          className="absolute w-3 h-3 rounded-full"
-          style={{ backgroundColor: "#C89B3C" }}
-        />
-        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#C89B3C" }} />
-      </div>
-
-      <div className="flex flex-col items-start gap-1 flex-1 min-w-0">
-        <div className="flex items-center gap-2">
-          <span className="text-xs lg:text-sm font-bold tracking-[0.35em] uppercase" style={{ color: "#C89B3C" }}>
-            {patch ? `Parche ${patch}` : "Parche actual"}
-          </span>
-          <span
-            className="text-[8px] tracking-[0.3em] uppercase px-2 py-px rounded"
-            style={{ backgroundColor: "rgba(200,155,60,0.18)", border: "1px solid #C89B3C40", color: "#C89B3C" }}
-          >
-            live
-          </span>
-        </div>
-        <span className="text-[10px] lg:text-sm tracking-wide" style={{ color: "#5a5060" }}>
-          Skins nuevas · Catálogo completo · Rarezas
-        </span>
-      </div>
-
-      <motion.span
-        animate={{ x: hovered ? 5 : 0 }}
-        transition={{ duration: 0.15 }}
-        className="text-base flex-shrink-0"
-        style={{ color: hovered ? "#C89B3C" : "#785A28" }}
-      >
-        →
-      </motion.span>
-    </motion.button>
-  );
-}
-
-function ProphecyLine({
-  prophecy,
-  index,
-  visited = false,
+function NavArrow({
   onClick,
+  label,
+  dir,
+  accent,
 }: {
-  prophecy: Prophecy;
-  index: number;
-  visited?: boolean;
   onClick: () => void;
+  label: string;
+  dir: "left" | "right";
+  accent: string;
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.35 + index * 0.13, duration: 0.55 }}
+    <button
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative w-full flex flex-col items-center gap-2 py-4 px-5 rounded cursor-pointer"
+      aria-label={label}
+      className="w-10 h-10 flex items-center justify-center rounded transition-all duration-200"
       style={{
-        background: hovered ? `${prophecy.color}0a` : "transparent",
-        transition: "background 0.22s",
+        border: hovered ? `1px solid ${accent}` : "1px solid rgba(240,230,211,0.2)",
+        background: hovered ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.25)",
+        color: hovered ? accent : "rgba(240,230,211,0.6)",
+        fontSize: 18,
+        backdropFilter: "blur(4px)",
       }}
     >
-      {visited && (
-        <div
-          className="absolute left-5 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full"
-          style={{ backgroundColor: `${prophecy.color}70` }}
-        />
-      )}
-
-      <motion.span
-        animate={{
-          color: hovered ? "#F0E6D3" : prophecy.special ? "#ba68c870" : "#C89B3C55",
-        }}
-        transition={{ duration: 0.18 }}
-        className="text-center text-sm lg:text-lg tracking-wide select-none"
-        style={{ fontStyle: "italic" }}
-      >
-        {prophecy.special && (
-          <span style={{ color: "#ba68c860", marginRight: 8, fontSize: 9 }}>
-            ◈
-          </span>
-        )}
-        &ldquo;{prophecy.text}&rdquo;
-      </motion.span>
-
-      <div className="h-4 flex items-center justify-center">
-        <AnimatePresence>
-          {hovered && (
-            <motion.span
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.15 }}
-              className="text-[9px] lg:text-xs tracking-[0.22em] uppercase font-bold whitespace-nowrap"
-              style={{ color: prophecy.color }}
-            >
-              {prophecy.reveal} →
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.button>
+      {dir === "left" ? "‹" : "›"}
+    </button>
   );
 }

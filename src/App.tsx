@@ -5,18 +5,17 @@ const Game = React.lazy(() => import("./components/Game"));
 const GameLobby = React.lazy(() => import("./components/GameLobby"));
 const RuneterraMap = React.lazy(() => import("./components/RuneterraMap"));
 const LoreTimeline = React.lazy(() => import("./components/LoreTimeline"));
-const NexusHub    = React.lazy(() => import("./components/NexusHub"));
-const ChampionQuiz    = React.lazy(() => import("./components/ChampionQuiz"));
-const ChampionExplorer = React.lazy(() => import("./components/ChampionExplorer"));
-const Oraculo          = React.lazy(() => import("./components/Oraculo"));
-const Sanctum          = React.lazy(() => import("./components/Sanctum"));
-const PatchSkins       = React.lazy(() => import("./components/PatchSkins"));
+const NexusHub = React.lazy(() => import("./components/NexusHub"));
+const ChampionExplorer = React.lazy(
+  () => import("./components/ChampionExplorer"),
+);
+const PatchSkins = React.lazy(() => import("./components/PatchSkins"));
 
 function App() {
   return (
     <BrowserRouter basename="/league-of-legends">
       <Routes>
-      <Route
+        <Route
           path="/"
           element={
             <Suspense fallback={<div>Loading...</div>}>
@@ -34,18 +33,23 @@ function App() {
           }
         />
 
+        <Route
+          path="/lore"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <LoreTimeline />
+            </Suspense>
+          }
+        />
 
-        <Route path="/lore" element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <LoreTimeline />
-          </Suspense>
-        } />
-
-        <Route path="/runeterra" element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <RuneterraMap />
-          </Suspense>
-        } />
+        <Route
+          path="/runeterra"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <RuneterraMap />
+            </Suspense>
+          }
+        />
 
         <Route
           path="/champion-select"
@@ -65,16 +69,6 @@ function App() {
           }
         />
 
-
-        <Route
-          path="/quiz"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <ChampionQuiz />
-            </Suspense>
-          }
-        />
-
         <Route
           path="/champions"
           element={
@@ -84,9 +78,14 @@ function App() {
           }
         />
 
-        <Route path="/oraculo" element={<Suspense fallback={<div>Loading...</div>}><Oraculo /></Suspense>} />
-        <Route path="/sanctum" element={<Suspense fallback={<div>Loading...</div>}><Sanctum /></Suspense>} />
-        <Route path="/patch" element={<Suspense fallback={<div>Loading...</div>}><PatchSkins /></Suspense>} />
+        <Route
+          path="/patch"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <PatchSkins />
+            </Suspense>
+          }
+        />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
