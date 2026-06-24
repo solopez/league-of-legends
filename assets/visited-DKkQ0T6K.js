@@ -1,0 +1,1 @@
+const s="nexus_visited",r=()=>{try{return JSON.parse(localStorage.getItem(s)||"[]")}catch{return[]}},i=t=>{try{const e=r();e.includes(t)||localStorage.setItem(s,JSON.stringify([...e,t]))}catch{}};export{i as m};
