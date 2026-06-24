@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Section {
@@ -80,10 +80,10 @@ const SECTIONS: Section[] = [
 export default function NexusHub() {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
-  const [prev, setPrev] = useState<number | null>(null);
+  const [, setPrev] = useState<number | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [currentPatch, setCurrentPatch] = useState<string | null>(null);
-  const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
+  const [, setImagesLoaded] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     fetch("https://ddragon.leagueoflegends.com/api/versions.json")
